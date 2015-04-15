@@ -16,6 +16,14 @@
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
      <!-- TABLE STYLES-->
     <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
+    
+    <?php
+    
+        include('php/connection.php');
+        include('php/functions.php');
+    
+    ?>
+    
 </head>
 <body>
     <div id="wrapper">
@@ -840,38 +848,33 @@
                         </div>
                         <div class="panel-body">
                             <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Username</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Larry</td>
-                                            <td>the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                                <?php 
+                                    global $start; 
+                                    global $end; 
+                                    
+                                    if (isset($_POST["prev_id"])) {
+                                        echo "isset";
+                                        GetComuniTabella($_POST["prev_id"], $_POST["next_id"]);  
+                                    }else{  
+                                        echo "is not set, get comuni";
+                                        GetComuniTabella($start, $end); 
+                                    }
+                                ?>
                             </div>
                         </div>
+                        <div>
+                        <a id="link" href="table.php" prev_id="<?php if (isset($_POST["prev_id"])) {
+                                        echo $_POST["prev_id"] + 10;
+                                    }else{  
+                                        echo $start + 10;
+                                    } ?>" next_id="<?php if (isset($_POST["next_id"])) {
+                                        echo $_POST["next_id"] + 10;
+                                    }else{  
+                                        echo $end + 10;
+                                    } ?>" class="btn btn-default btn-sm">default</a>
+                        <a href="#" class="btn btn-default btn-sm">default</a>
+                        </div>
+
                     </div>
                     <!--  End  Striped Rows Table  -->
                 </div>
@@ -965,6 +968,24 @@
                     </div>
                     <!-- End  Hover Rows  -->
                 </div>
+                
+                <?php if(($_POST)) {
+    $users1 = $_POST['cityname'];
+    echo $users1;
+    echo "shakti";
+ } ?>
+
+    <td align="center"> 
+    <form action="table.php" method="POST">
+
+ <a href="#" style="text-decoration:none;" onclick="parentNode.submit();" name="an">
+
+      <?php echo "citynnnn"; ?>
+    <input type="text"  value="citynnnn" name="cityname">
+    </a>
+</form>
+      </td>
+                
                 <div class="col-md-6">
                      <!--    Context Classes  -->
                     <div class="panel panel-default">
@@ -1040,6 +1061,23 @@
                 $('#dataTables-example').dataTable();
             });
     </script>
+    
+    <script>
+        
+        $("a#link").click(function(){
+
+        $.post("table.php",
+           {
+             prev_id: $(this).attr("prev_id"),
+             next_id: $(this).attr("next_id")
+           }
+        );
+        alert('ID:' + response);
+        
+    });
+        
+    </script>
+    
          <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
     

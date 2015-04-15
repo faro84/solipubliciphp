@@ -15,6 +15,12 @@
     <link href="assets/css/custom-styles.css" rel="stylesheet" />
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <?php
+    
+        include('php/connection.php');
+        include('php/functions.php');
+    
+    ?>
 </head>
 
 <body>
@@ -245,7 +251,7 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a class="active-menu" href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a>
+                        <a class="active-menu" href="index.php"><i class="fa fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href="ui-elements.html"><i class="fa fa-desktop"></i> UI Elements</a>
@@ -258,7 +264,7 @@
                     </li>
                     
                     <li>
-                        <a href="table.html"><i class="fa fa-table"></i> Responsive Tables</a>
+                        <a href="table.php"><i class="fa fa-table"></i> Responsive Tables</a>
                     </li>
                     <li>
                         <a href="form.html"><i class="fa fa-edit"></i> Forms </a>
@@ -310,7 +316,7 @@
                         <h1 class="page-header">
                             Dashboard 
                             <small>
-                                Summary of your App <?php echo "Today is " . date("Y/m/d") . "<br>"; ?>
+                                Summary of your App <?php $blah = get_type("CDC"); echo $blah; ?>
                             </small>
                         </h1>
 						<ol class="breadcrumb">
@@ -612,7 +618,6 @@
 	
     <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
-
 
 </body>
 
