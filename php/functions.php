@@ -51,7 +51,7 @@
             die("Connection failed: " . $conn->connect_error);
         }
         
-        $limit = $start + $end;
+        $limit = $end;
         $sql = "SELECT * FROM soldipubblici_notebook.anagrafe_comuni ORDER BY COD_COMUNE LIMIT " . $limit . " OFFSET " . $start . ";";
         echo $sql;
         $result = $conn->query($sql);

@@ -16,7 +16,8 @@
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
      <!-- TABLE STYLES-->
     <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
-    
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="assets/js/simplechart.js"></script>
     <?php
     
         include('php/connection.php');
@@ -266,7 +267,7 @@
                     </li>
                     
                     <li>
-                        <a href="table.html" class="active-menu"><i class="fa fa-table"></i> Responsive Tables</a>
+                        <a href="table.php" class="active-menu"><i class="fa fa-table"></i> Responsive Tables</a>
                     </li>
                     <li>
                         <a href="form.html"><i class="fa fa-edit"></i> Forms </a>
@@ -863,7 +864,25 @@
                             </div>
                         </div>
                         <div>
-                        <a id="link" href="table.php" prev_id="<?php if (isset($_POST["prev_id"])) {
+                            <form action="table.php" method="POST">
+
+                        <a href="#" style="text-decoration:none;" class="btn btn-default btn-sm" onclick="parentNode.submit();" name="an">
+
+                             <?php echo "citynnnn"; ?>
+                                <input type="hidden"  value="
+                                    <?php if (isset($_POST["prev_id"])) {
+                                        echo $_POST["prev_id"] + 10;
+                                    }else{  
+                                        echo $start + 10;
+                                    } ?>" name="prev_id">
+                                <input type="hidden"  value="<?php if (isset($_POST["next_id"])) {
+                                        echo $_POST["next_id"];
+                                    }else{  
+                                        echo $end;
+                                    } ?>" name="next_id">
+                           </a>
+                       </form>
+                        <!--<a id="link" href="table.php" prev_id="<?php if (isset($_POST["prev_id"])) {
                                         echo $_POST["prev_id"] + 10;
                                     }else{  
                                         echo $start + 10;
@@ -872,7 +891,7 @@
                                     }else{  
                                         echo $end + 10;
                                     } ?>" class="btn btn-default btn-sm">default</a>
-                        <a href="#" class="btn btn-default btn-sm">default</a>
+                        <a href="#" class="btn btn-default btn-sm">default</a>-->
                         </div>
 
                     </div>
@@ -969,22 +988,18 @@
                     <!-- End  Hover Rows  -->
                 </div>
                 
-                <?php if(($_POST)) {
-    $users1 = $_POST['cityname'];
-    echo $users1;
-    echo "shakti";
- } ?>
+                <svg class="chart"></svg>
 
-    <td align="center"> 
-    <form action="table.php" method="POST">
+<!--                    <td align="center"> 
+                        <form action="table.php" method="POST">
 
- <a href="#" style="text-decoration:none;" onclick="parentNode.submit();" name="an">
+                        <a href="#" style="text-decoration:none;" onclick="parentNode.submit();" name="an">
 
-      <?php echo "citynnnn"; ?>
-    <input type="text"  value="citynnnn" name="cityname">
-    </a>
-</form>
-      </td>
+                             <?php echo "citynnnn"; ?>
+                           <input type="text"  value="citynnnn" name="cityname">
+                           </a>
+                       </form>
+                    </td>-->
                 
                 <div class="col-md-6">
                      <!--    Context Classes  -->
@@ -1062,7 +1077,7 @@
             });
     </script>
     
-    <script>
+<!--    <script>
         
         $("a#link").click(function(){
 
@@ -1076,7 +1091,7 @@
         
     });
         
-    </script>
+    </script>-->
     
          <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
