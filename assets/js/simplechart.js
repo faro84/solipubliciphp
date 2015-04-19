@@ -1,7 +1,7 @@
 //var w = 1500,
 //		    h = 500;
 
-    var margin = {top: 20, right: 30, bottom: 30, left: 40},
+    var margin = {top: 20, right: 50, bottom: 30, left: 100},
         width = 1260 - margin.left - margin.right,
         height = 600 - margin.top - margin.bottom;
 

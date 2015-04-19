@@ -2,10 +2,9 @@
 
     global $conn;
     
-    
     $data = array();
     
-     $hostname = "localhost";
+    $hostname = "localhost";
     $dbusername = "root";
     $dbname = "soldipubblici_notebook";
     $dbpassword = "root";
@@ -13,8 +12,118 @@
     if (!$link) { 
         die('Connect Error (' . mysqli_connect_errno() . ') ' . mysqli_connect_error()); 
     }
-
-    $sql = "SELECT * FROM soldipubblici_notebook.comuni_totalespese limit 100";
+    
+    $ripartizioni = "SELECT RIPART_GEO FROM soldipubblici_notebook.anag_reg_prov GROUP BY RIPART_GEO;";
+    
+    $comuni_sql = "SELECT * FROM soldipubblici_notebook.anagrafe_comuni;";
+    
+    $myfile = fopen("sidemenu.php", "w") or die("Unable to open file!");
+    $txt = "<?php " . PHP_EOL;
+    fwrite($myfile, $txt);
+    $txt = "echo \"<a href=\\\"#\\\"><i class=\\\"fa fa-sitemap\\\"></i> Multi-Level Dropdown<span class=\\\"fa arrow\\\"></span></a>\";" . PHP_EOL;
+    fwrite($myfile, $txt);
+    $txt = "echo \"<ul class=\\\"nav nav-second-level\\\">\";" . PHP_EOL;
+    fwrite($myfile, $txt);
+    
+    $result = $link->query($ripartizioni);
+    if ($result->num_rows > 0)
+    {
+                while($row = $result->fetch_assoc())
+                {
+                    $regioni_sql = "SELECT COD_REGIONE, DESCRIZIONE_REGIONE, RIPART_GEO from soldipubblici_notebook.anag_reg_prov "
+                            . "WHERE RIPART_GEO='" . $row["RIPART_GEO"] . "'  GROUP BY COD_REGIONE;";
+                    $result_regioni = $link->query($regioni_sql);
+                    if ($result_regioni->num_rows > 0)
+                    {
+                        $txt = "echo \"<li>\";" . PHP_EOL;
+                        fwrite($myfile, $txt);
+                        $txt = "echo \"<a href=\\\"php/ripartizione_geografica.php?cod_rip=". $row["RIPART_GEO"] ."\\\">" . $row["RIPART_GEO"] . "<span class=\\\"fa arrow\\\"></span></a>\";" . PHP_EOL;
+                        fwrite($myfile, $txt);
+                        $txt = "echo \"<ul class=\\\"nav nav-third-level\\\">\";" . PHP_EOL;
+                        fwrite($myfile, $txt);
+                        while($row_regioni = $result_regioni->fetch_assoc())
+                        {
+                            $provincie_sql = "SELECT COD_PROVINCIA, DESCRIZIONE_PROVINCIA, COD_REGIONE FROM soldipubblici_notebook.anag_reg_prov WHERE "
+                                    . "COD_REGIONE='" . $row_regioni["COD_REGIONE"]  . "';";
+                            $result_provincie = $link->query($provincie_sql);
+                            if ($result_provincie->num_rows > 0)
+                            {
+                                $txt = "echo \"<li>\";" . PHP_EOL;
+                                fwrite($myfile, $txt);
+                                $txt = "echo \"<a href=\\\"#\\\">" . $row_regioni["DESCRIZIONE_REGIONE"] . "<span class=\\\"fa arrow\\\"></span></a>\";" . PHP_EOL;
+                                fwrite($myfile, $txt);
+                                $txt = "echo \"<ul class=\\\"nav nav-third-level\\\">\";" . PHP_EOL;
+                                fwrite($myfile, $txt);
+                                while($row_provincie = $result_provincie->fetch_assoc())
+                                {
+                                    $txt = "echo \"<li>\";" . PHP_EOL;
+                                    fwrite($myfile, $txt);
+                                    $txt = "echo \"<a href=\\\"#\\\">" . $row_provincie["DESCRIZIONE_PROVINCIA"] . "</a>\";" . PHP_EOL;
+                                    fwrite($myfile, $txt);
+                                    $txt = "echo \"</li>\";" . PHP_EOL;
+                                    fwrite($myfile, $txt);
+                                }
+                                $txt = "echo \"</ul>\";" . PHP_EOL;
+                                fwrite($myfile, $txt);
+                            }
+                            else
+                            {
+                                $txt = "echo \"<li>\";" . PHP_EOL;
+                                fwrite($myfile, $txt);
+                                $txt = "echo \"<a href=\\\"#\\\">" . $row_regioni["DESCRIZIONE_REGIONE"] . "</a>\";" . PHP_EOL;
+                                fwrite($myfile, $txt);
+                                $txt = "echo \"</li>\";" . PHP_EOL;
+                                fwrite($myfile, $txt);
+                            }
+                            
+                        }
+                        $txt = "echo \"</ul>\";" . PHP_EOL;
+                        fwrite($myfile, $txt);
+                    }
+                    else
+                    {
+                        $txt = "echo \"<li>\";" . PHP_EOL;
+                        fwrite($myfile, $txt);
+                        $txt = "echo \"<a href=\\\"#\\\">" . $row["RIPART_GEO"] . "</a>\";" . PHP_EOL;
+                        fwrite($myfile, $txt);
+                    }
+                    
+                    $txt = "echo \"</li>\";" . PHP_EOL;
+                    fwrite($myfile, $txt);
+                }
+    }
+    
+    
+    $txt = "echo \"</ul>\";" . PHP_EOL;
+    fwrite($myfile, $txt);
+    $txt = "?>";
+    fwrite($myfile, $txt);
+    fclose($myfile);
+    
+//                            <li>
+//                                <a href="#">Second Level Link</a>
+//                            </li>
+//                            <li>
+//                                <a href="#">Second Level Link</a>
+//                            </li>
+//                            <li>
+//                                <a href="#">Second Level Link<span class="fa arrow"></span></a>
+//                                <ul class="nav nav-third-level">
+//                                    <li>
+//                                        <a href="#">Third Level Link</a>
+//                                    </li>
+//                                    <li>
+//                                        <a href="#">Third Level Link</a>
+//                                    </li>
+//                                    <li>
+//                                        <a href="#">Third Level Link</a>
+//                                    </li>
+//
+//                                </ul>
+//
+//                            </li>
+    
+    $sql = "SELECT COD_COMUNE, log(convert(totale,unsigned)/100) as TOTALE FROM soldipubblici_notebook.comuni_totalespese order by convert(totale,unsigned) desc limit 30;";
 
     $result = $link->query($sql);
     if ($result->num_rows > 0)
