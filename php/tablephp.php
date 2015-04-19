@@ -750,4 +750,6 @@
                     <!--End Advanced Tables -->
                 </div>
             </div>
+                
+                <script src="assets/js/simplechart.js" charset="utf-8"></script>
 

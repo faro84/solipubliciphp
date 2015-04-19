@@ -290,8 +290,13 @@
                     </li>
                     
                     <li>
-                        <a href="table.php" class="active-menu"><i class="fa fa-table"></i> Responsive Tables</a>
+                        <a href="index.php?content=table" class="active-menu"><i class="fa fa-table"></i> Responsive Tables</a>
                     </li>
+                    
+                    <li>
+                        <a href="index.php?content=rip&cod_rip=MAO"><i class="fa fa-edit"></i> Ripartizione geo </a>
+                    </li>
+                    
                     <li>
                         <a href="form.html"><i class="fa fa-edit"></i> Forms </a>
                     </li>
@@ -321,6 +326,8 @@
                             include("php/maincontent.php");
                         if($content == "table")
                             include("php/tablephp.php");
+                        if($content == "rip")
+                            include("php/ripartizione_geografica.php");
                     }
                     else
                     {
@@ -359,19 +366,26 @@
             $content = $_GET["content"];
                         
         
-            if($content == "table")
+            if($content == "table" || $content == "rip")
     ?>          
                 <script src="assets/js/d3.min.js" charset="utf-8" ></script>
                 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
                 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
-                <script src="assets/js/simplechart.js" charset="utf-8"></script>
+                <script src="assets/js/simplechart.js"></script>
                 <script>
                     $(document).ready(function () {
                     $('#dataTables-example').dataTable();
                     });
                 </script>
-    
+              
     <?php
+        if($content == "rip"){
+         ?>
+                <script type="text/javascript">
+        generateChart(<?php echo "\"" . $_GET["cod_rip"] . "\""; ?>);
+    </script>
+    <?php    }
+    
         }
     
     ?>
