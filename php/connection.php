@@ -5,12 +5,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-    $servername = "localhost";
-    $username = "root";
-    $password = "root";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password);
+    $username = "root"; 
+    $password = "root";   
+    $host = "localhost";
+    $database= "soldipubblici_notebook";
+    
+    $conn = new mysqli($host, $username, $password, $database);
     $start = 0;
     $end = 10;
 ?>

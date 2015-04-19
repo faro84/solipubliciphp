@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-      <meta charset="utf-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Free Bootstrap Admin Template : Insight</title>
 	<!-- Bootstrap Styles-->
@@ -13,20 +13,42 @@
         <!-- Custom Styles-->
     <link href="assets/css/custom-styles.css" rel="stylesheet" />
      <!-- Google Fonts-->
-   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
      <!-- TABLE STYLES-->
     <link href="assets/js/dataTables/dataTables.bootstrap.css" rel="stylesheet" />
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="assets/js/simplechart.js"></script>
+    <script src="assets/js/d3.min.js" charset="utf-8" ></script>
+    
     <?php
     
         include('php/connection.php');
         include('php/functions.php');
     
     ?>
+    <style>
+		.bar {
+  fill: steelblue;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+    </style>  
     
-</head>
+</head>  
 <body>
+    
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
@@ -865,33 +887,41 @@
                         </div>
                         <div>
                             <form action="table.php" method="POST">
-
-                        <a href="#" style="text-decoration:none;" class="btn btn-default btn-sm" onclick="parentNode.submit();" name="an">
-
-                             <?php echo "citynnnn"; ?>
-                                <input type="hidden"  value="
-                                    <?php if (isset($_POST["prev_id"])) {
-                                        echo $_POST["prev_id"] + 10;
-                                    }else{  
-                                        echo $start + 10;
-                                    } ?>" name="prev_id">
-                                <input type="hidden"  value="<?php if (isset($_POST["next_id"])) {
-                                        echo $_POST["next_id"];
-                                    }else{  
-                                        echo $end;
-                                    } ?>" name="next_id">
-                           </a>
-                       </form>
-                        <!--<a id="link" href="table.php" prev_id="<?php if (isset($_POST["prev_id"])) {
-                                        echo $_POST["prev_id"] + 10;
-                                    }else{  
-                                        echo $start + 10;
-                                    } ?>" next_id="<?php if (isset($_POST["next_id"])) {
-                                        echo $_POST["next_id"] + 10;
-                                    }else{  
-                                        echo $end + 10;
-                                    } ?>" class="btn btn-default btn-sm">default</a>
-                        <a href="#" class="btn btn-default btn-sm">default</a>-->
+                                <a href="#" style="text-decoration:none;" class="btn btn-default btn-sm" onclick="parentNode.submit();" name="an">
+                                <?php echo "previous"; ?>
+                                   <input type="hidden"  value="
+                                       <?php if (isset($_POST["prev_id"])) {
+                                            if($prev_id >= 10)
+                                                echo $_POST["prev_id"] - 10;
+                                            else 
+                                               echo $_POST["prev_id"];
+                                       }else{  
+                                           echo $start;
+                                       } ?>" name="prev_id">
+                                   <input type="hidden"  value="<?php if (isset($_POST["next_id"])) {
+                                           echo $_POST["next_id"];
+                                       }else{  
+                                           echo $end;
+                                       } ?>" name="next_id">
+                                </a>
+                            </form>
+                            <form action="table.php" method="POST">
+                                <a href="#" style="text-decoration:none;" class="btn btn-default btn-sm" onclick="parentNode.submit();" name="an">
+                                <?php echo "next"; ?>
+                                   <input type="hidden"  value="
+                                       <?php if (isset($_POST["prev_id"])) {
+                                           echo $_POST["prev_id"] + 10;
+                                       }else{  
+                                           echo $start + 10;
+                                       } ?>" name="prev_id">
+                                   <input type="hidden"  value="<?php if (isset($_POST["next_id"])) {
+                                           echo $_POST["next_id"];
+                                       }else{  
+                                           echo $end;
+                                       } ?>" name="next_id">
+                                </a>
+                            </form>
+                            
                         </div>
 
                     </div>
@@ -988,19 +1018,6 @@
                     <!-- End  Hover Rows  -->
                 </div>
                 
-                <svg class="chart"></svg>
-
-<!--                    <td align="center"> 
-                        <form action="table.php" method="POST">
-
-                        <a href="#" style="text-decoration:none;" onclick="parentNode.submit();" name="an">
-
-                             <?php echo "citynnnn"; ?>
-                           <input type="text"  value="citynnnn" name="cityname">
-                           </a>
-                       </form>
-                    </td>-->
-                
                 <div class="col-md-6">
                      <!--    Context Classes  -->
                     <div class="panel panel-default">
@@ -1054,6 +1071,22 @@
                 </div>
             </div>
                 <!-- /. ROW  -->
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             Advanced Tables
+                        </div>
+                        <div class="panel-body">
+                            <svg id="chart"></svg>
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+                
         </div>
                <footer><p>All right reserved. Template by: <a href="http://webthemez.com">WebThemez</a></p></footer>
     </div>
@@ -1071,6 +1104,7 @@
      <!-- DATA TABLE SCRIPTS -->
     <script src="assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
+    <script src="assets/js/simplechart.js" charset="utf-8"></script>
         <script>
             $(document).ready(function () {
                 $('#dataTables-example').dataTable();

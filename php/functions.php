@@ -9,6 +9,8 @@
     function get_type($r_id)
     {
         global $conn;
+        
+        
         //$result=mysqli_query($conn, "SELECT * FROM soldipubblici_notebook.anag_codgest_uscite where COD_GEST=". $r_id .";") 
           //      or die("select type from rooms where id=$r_id" . "<br/><br/>" . mysqli_error());
         //$row = mysqli_fetch_array($result);
@@ -20,17 +22,21 @@
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
+        else{
+            $sql = "SELECT * FROM soldipubblici_notebook.anag_comparti WHERE COD_COMPARTO = \"" . $r_id . "\"";
         
-        $sql = "SELECT * FROM soldipubblici_notebook.anag_comparti WHERE COD_COMPARTO = \"" . $r_id . "\"";
-        $result = $conn->query($sql);
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
-                echo "id: " . $row["COD_COMPARTO"]. "<br>";
+            $result = $conn->query($sql);
+            if ($result->num_rows > 0) {
+                // output data of each row
+                while($row = $result->fetch_assoc()) {
+                    echo "id: " . $row["COD_COMPARTO"]. "<br>";
+                }
+            } else {
+                echo "0 results";
             }
-        } else {
-            echo "0 results";
         }
+        
+        
     }
     
     function GetComuniTabella($start, $end)
@@ -47,6 +53,8 @@
         echo "<tbody>";
         
         global $conn;
+        global $server;
+        
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
         }
