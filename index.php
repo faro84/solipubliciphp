@@ -294,7 +294,7 @@
                     </li>
                     
                     <li>
-                        <a href="index.php?content=rip&cod_rip=MAO"><i class="fa fa-edit"></i> Ripartizione geo </a>
+                        <a href="index.php?content=rip&cod_rip=ITALIA%20NORD-OCCIDENTALE"><i class="fa fa-edit"></i> Ripartizione geo </a>
                     </li>
                     
                     <li>

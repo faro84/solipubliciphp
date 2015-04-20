@@ -307,7 +307,7 @@
      <!-- DATA TABLE SCRIPTS -->
     <script src="assets/js/dataTables/jquery.dataTables.js"></script>
     <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
-    <script src="assets/js/simplechart.js" charset="utf-8"></script>
+    <!--<script src="assets/js/simplechart.js" charset="utf-8"></script>-->
         <script>
             $(document).ready(function () {
                 $('#dataTables-example').dataTable();

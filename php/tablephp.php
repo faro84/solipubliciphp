@@ -751,5 +751,5 @@
                 </div>
             </div>
                 
-                <script src="assets/js/simplechart.js" charset="utf-8"></script>
+                <!--<script src="assets/js/simplechart.js" charset="utf-8"></script>-->
 

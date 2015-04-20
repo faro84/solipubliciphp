@@ -749,6 +749,5 @@
                     </div>
                     <!--End Advanced Tables -->
                 </div>
-            </div>             
-?>
+            </div>     
 

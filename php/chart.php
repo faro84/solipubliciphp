@@ -2,6 +2,8 @@
 
     //global $conn;
     
+
+
     $username = "root"; 
     $password = "root";   
     $host = "localhost";
@@ -12,15 +14,32 @@
 
     $data = array();
     //$con = mysqli_connect("localhost","root","root","soldipubblici_notebook") or die("Some error occurred during connection " . mysqli_error($con)); 
-    $sql = "SELECT COD_COMUNE, log(convert(totale,unsigned)/100) as TOTALE FROM soldipubblici_notebook.comuni_totalespese order by convert(totale,unsigned) desc limit 30;";
-    $result = $conn->query($sql);
+    
+    if(isset($_GET["cod_rip"])){
+        
+        $sql = "SELECT COD_REGIONE, TOTALE FROM soldipubblici_notebook.regioni_totalespese where cod_rip = '" . $_GET["cod_rip"] . "';";
+        $result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {
-        // output data of each row
-        while($row = $result->fetch_assoc()) {
-            $data[] = $row;
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
         }
-    }
 
-    echo json_encode($data);
+        echo json_encode($data);
+    }
+    else{
+        $sql = "SELECT COD_COMUNE, log(convert(totale,unsigned)/100) as TOTALE FROM soldipubblici_notebook.comuni_totalespese order by convert(totale,unsigned) desc limit 30;";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $data[] = $row;
+            }
+        }
+
+        echo json_encode($data);
+    }
 ?>

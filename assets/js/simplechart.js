@@ -100,13 +100,19 @@
             }
         });
         
-    d3.json("php/chart.php", function(error, json) {
+        var link = "php/chart.php";
+        if(obj != null)
+            link = link + "?cod_rip=" + obj.replace(" ", "%20");
+        
+        console.log(link);
+        
+    d3.json(link, function(error, json) {
                     
                         if (error) return console.warn(error);
                         
 			var data = json;
 	
-    x.domain(data.map(function(d) { return d.COD_COMUNE; }));
+    x.domain(data.map(function(d) { return d.COD_REGIONE; }));
     y.domain([0, d3.max(data, function(d) { return d.TOTALE; })]);
 
     chart.append("g")
@@ -122,7 +128,7 @@
         .data(data)
         .enter().append("rect")
         .attr("class", "bar")
-        .attr("x", function(d) { return x(d.COD_COMUNE); })
+        .attr("x", function(d) { return x(d.COD_REGIONE); })
         .attr("y", function(d) { return y(d.TOTALE); })
         .attr("height", function(d) { return height - y(d.TOTALE); })
         .attr("width", x.rangeBand());
