@@ -10,27 +10,27 @@
     $database= "soldipubblici_notebook";
     
     // Create connection
-    $conn = new mysqli($host, $username, $password, $database);
+    $con = new mysqli($host, $username, $password, $database);
 
     $data = array();
     //$con = mysqli_connect("localhost","root","root","soldipubblici_notebook") or die("Some error occurred during connection " . mysqli_error($con)); 
     
     if(isset($_GET["cod_rip"])){
         
-        $sql = "SELECT COD_REGIONE, TOTALE FROM soldipubblici_notebook.regioni_totalespese where cod_rip = '" . $_GET["cod_rip"] . "';";
-        $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
+        $sql = "SELECT COD_REGIONE, TOTALE FROM soldipubblici_notebook.regioni_totalespese where COD_RIPARTIZIONE = '" . $_GET["cod_rip"] . "';";
+        $result = $con->query($sql);
+        
+        if( !$result)
+            die($con->error);
+        
+        while($row = $result->fetch_object()) 
                 $data[] = $row;
-            }
-        }
-
+        
         echo json_encode($data);
-    }
-    else{
-        $sql = "SELECT COD_COMUNE, log(convert(totale,unsigned)/100) as TOTALE FROM soldipubblici_notebook.comuni_totalespese order by convert(totale,unsigned) desc limit 30;";
+        
+        }
+    else if($_GET["cod_com"]){
+        $sql = "SELECT COD_COMUNE, log(convert(totale,unsigned)/100) as TOTALE FROM soldipubblici_notebook.comuni_totalespese WHERE cod_com = '" . $_GET["cod_com"] . "' ;";
         $result = $conn->query($sql);
 
         if ($result->num_rows > 0) {

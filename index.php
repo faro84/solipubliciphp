@@ -328,6 +328,8 @@
                             include("php/tablephp.php");
                         if($content == "rip")
                             include("php/ripartizione_geografica.php");
+                        if($content == "com")
+                            include("php/comune.php");
                     }
                     else
                     {
@@ -364,9 +366,7 @@
         if(isset($_GET["content"]))
         {
             $content = $_GET["content"];
-                        
-        
-            if($content == "table" || $content == "rip")
+            if($content == "table" || $content == "rip" || $content == "com"){
     ?>          
                 <script src="assets/js/d3.min.js" charset="utf-8" ></script>
                 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
@@ -378,14 +378,19 @@
                     });
                 </script>
               
-    <?php
+            <?php}
         if($content == "rip"){
          ?>
                 <script type="text/javascript">
-        generateChart(<?php echo "\"" . $_GET["cod_rip"] . "\""; ?>);
-    </script>
+                    generateRipartizioneChart(<?php echo "\"" . $_GET["cod_rip"] . "\""; ?>);
+                </script>
     <?php    }
-    
+    if($content == "com"){
+         ?>
+                <script type="text/javascript">
+                    generateComuneChart(<?php echo "\"" . $_GET["cod_com"] . "\""; ?>);
+                </script>
+    <?php    }
         }
     
     ?>
