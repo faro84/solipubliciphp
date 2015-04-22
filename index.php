@@ -17,8 +17,8 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     <?php
     
-        include('php/connection.php');
-        include('php/functions.php');
+        include_once('php/connection.php');
+        include_once('php/functions.php');
     
     ?>
     

@@ -1,9 +1,7 @@
 <?php
 
-    //global $conn;
+    global $conn;
     
-
-
     $username = "root"; 
     $password = "root";   
     $host = "localhost";
@@ -18,10 +16,10 @@
     if(isset($_GET["cod_rip"])){
         
         $sql = "SELECT COD_REGIONE, TOTALE FROM soldipubblici_notebook.regioni_totalespese where COD_RIPARTIZIONE = '" . $_GET["cod_rip"] . "';";
-        $result = $con->query($sql);
+        $result = $conn->query($sql);
         
         if( !$result)
-            die($con->error);
+            die($conn->error);
         
         while($row = $result->fetch_object()) 
                 $data[] = $row;
@@ -30,16 +28,17 @@
         
         }
     else if($_GET["cod_com"]){
-        $sql = "SELECT COD_COMUNE, log(convert(totale,unsigned)/100) as TOTALE FROM soldipubblici_notebook.comuni_totalespese WHERE cod_com = '" . $_GET["cod_com"] . "' ;";
+        
+        $sql = "SELECT COD_COMUNE, log(convert(totale,unsigned)/100) as TOTALE FROM soldipubblici_notebook.comuni_totalespese WHERE COD_COMUNE = '" . $_GET["cod_com"] . "' ;";
         $result = $conn->query($sql);
-
-        if ($result->num_rows > 0) {
-            // output data of each row
-            while($row = $result->fetch_assoc()) {
+        
+        if( !$result)
+            die($conn->error);
+        
+        while($row = $result->fetch_object()) 
                 $data[] = $row;
-            }
-        }
-
+        
         echo json_encode($data);
     }
+    $conn->close();
 ?>
