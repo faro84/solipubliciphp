@@ -20,11 +20,11 @@
     $comuni_sql = "SELECT * FROM soldipubblici_notebook.anagrafe_comuni;";
     
     $myfile = fopen("sidemenu.php", "w") or die("Unable to open file!");
-    $txt = "<?php " . PHP_EOL;
+    //$txt = "<?php " . PHP_EOL;
+    //fwrite($myfile, $txt);
+    $txt = "<a href=\"#\"><i class=\"fa fa-sitemap\"></i> Multi-Level Dropdown<span class=\"fa arrow\"></span></a>" . PHP_EOL;
     fwrite($myfile, $txt);
-    $txt = "echo \"<a href=\\\"#\\\"><i class=\\\"fa fa-sitemap\\\"></i> Multi-Level Dropdown<span class=\\\"fa arrow\\\"></span></a>\";" . PHP_EOL;
-    fwrite($myfile, $txt);
-    $txt = "echo \"<ul class=\\\"nav nav-second-level\\\">\";" . PHP_EOL;
+    $txt = "<ul class=\"nav nav-second-level\">" . PHP_EOL;
     fwrite($myfile, $txt);
     
     $result = $link->query($ripartizioni);
@@ -37,11 +37,11 @@
                     $result_regioni = $link->query($regioni_sql);
                     if ($result_regioni->num_rows > 0)
                     {
-                        $txt = "echo \"<li>\";" . PHP_EOL;
+                        $txt = "<li>" . PHP_EOL;
                         fwrite($myfile, $txt);
-                        $txt = "echo \"<a href=\\\"php/ripartizione_geografica.php?cod_rip=". $row["RIPART_GEO"] ."\\\">" . $row["RIPART_GEO"] . "<span class=\\\"fa arrow\\\"></span></a>\";" . PHP_EOL;
+                        $txt = "<a href=\"index.php?content=rip&cod_rip=". $row["RIPART_GEO"] ."\">" . $row["RIPART_GEO"] . "<span class=\"fa arrow\"></span></a>" . PHP_EOL;
                         fwrite($myfile, $txt);
-                        $txt = "echo \"<ul class=\\\"nav nav-third-level\\\">\";" . PHP_EOL;
+                        $txt = "<ul class=\"nav nav-third-level\">" . PHP_EOL;
                         fwrite($myfile, $txt);
                         while($row_regioni = $result_regioni->fetch_assoc())
                         {
@@ -50,11 +50,11 @@
                             $result_provincie = $link->query($provincie_sql);
                             if ($result_provincie->num_rows > 0)
                             {
-                                $txt = "echo \"<li>\";" . PHP_EOL;
+                                $txt = "<li>" . PHP_EOL;
                                 fwrite($myfile, $txt);
-                                $txt = "echo \"<a href=\\\"#\\\">" . $row_regioni["DESCRIZIONE_REGIONE"] . "<span class=\\\"fa arrow\\\"></span></a>\";" . PHP_EOL;
+                                $txt = "<a href=\"#\">" . $row_regioni["DESCRIZIONE_REGIONE"] . "<span class=\"fa arrow\"></span></a>" . PHP_EOL;
                                 fwrite($myfile, $txt);
-                                $txt = "echo \"<ul class=\\\"nav nav-third-level\\\">\";" . PHP_EOL;
+                                $txt = "<ul class=\"nav nav-third-level\">" . PHP_EOL;
                                 fwrite($myfile, $txt);
                                 while($row_provincie = $result_provincie->fetch_assoc())
                                 {
@@ -63,70 +63,69 @@
                                     $result_comuni = $link->query($comuni_sql);
                                     if ($result_comuni->num_rows > 0)
                                     {
-                                        $txt = "echo \"<li>\";" . PHP_EOL;
+                                        $txt = "<li>" . PHP_EOL;
                                         fwrite($myfile, $txt);
-                                        $txt = "echo \"<a href=\\\"#\\\">" . $row_provincie["DESCRIZIONE_PROVINCIA"] . "<span class=\\\"fa arrow\\\"></span></a>\";" . PHP_EOL;
+                                        $txt = "<a href=\"#\">" . $row_provincie["DESCRIZIONE_PROVINCIA"] . "<span class=\"fa arrow\"></span></a>" . PHP_EOL;
                                         fwrite($myfile, $txt);
-                                        $txt = "echo \"<ul class=\\\"nav nav-third-level\\\">\";" . PHP_EOL;
+                                        $txt = "<ul class=\"nav nav-third-level\">" . PHP_EOL;
                                         fwrite($myfile, $txt);
                                         while($row_comuni = $result_comuni->fetch_assoc())
                                         {
-                                            $txt = "echo \"<li>\";" . PHP_EOL;
+                                            $txt = "<li>" . PHP_EOL;
                                             fwrite($myfile, $txt);
-                                            $txt = "echo \"<a href=\\\"#\\\">" . $row_comuni["DESCR_COMUNE"] . "</a>\";" . PHP_EOL;
+                                            $txt = "<a href=\"index.php?content=com&cod_com=". $row_comuni["COD_COMUNE"] ."\">" . $row_comuni["DESCR_COMUNE"] . "</a>" . PHP_EOL;
                                             fwrite($myfile, $txt);
-                                            $txt = "echo \"</li>\";" . PHP_EOL;
+                                            $txt = "</li>" . PHP_EOL;
                                             fwrite($myfile, $txt);
                                         }
                                         
-                                        $txt = "echo \"</ul>\";" . PHP_EOL;
+                                        $txt = "</ul>" . PHP_EOL;
                                         fwrite($myfile, $txt);
                                     }
                                     else
                                         {
-                                        $txt = "echo \"<li>\";" . PHP_EOL;
+                                        $txt = "<li>" . PHP_EOL;
                                         fwrite($myfile, $txt);
-                                        $txt = "echo \"<a href=\\\"#\\\">" . $row_provincie["DESCRIZIONE_PROVINCIA"] . "</a>\";" . PHP_EOL;
+                                        $txt = "<a href=\"#\">" . $row_provincie["DESCRIZIONE_PROVINCIA"] . "</a>" . PHP_EOL;
                                         fwrite($myfile, $txt);
-                                        $txt = "echo \"</li>\";" . PHP_EOL;
+                                        $txt = "</li>" . PHP_EOL;
                                         fwrite($myfile, $txt);
                                     }
                                 }
-                                $txt = "echo \"</ul>\";" . PHP_EOL;
+                                $txt = "</ul>" . PHP_EOL;
                                 fwrite($myfile, $txt);
                             }
                             else
                             {
-                                $txt = "echo \"<li>\";" . PHP_EOL;
+                                $txt = "<li>" . PHP_EOL;
                                 fwrite($myfile, $txt);
-                                $txt = "echo \"<a href=\\\"#\\\">" . $row_regioni["DESCRIZIONE_REGIONE"] . "</a>\";" . PHP_EOL;
+                                $txt = "<a href=\"#\">" . $row_regioni["DESCRIZIONE_REGIONE"] . "</a>" . PHP_EOL;
                                 fwrite($myfile, $txt);
-                                $txt = "echo \"</li>\";" . PHP_EOL;
+                                $txt = "</li>" . PHP_EOL;
                                 fwrite($myfile, $txt);
                             }
                             
                         }
-                        $txt = "echo \"</ul>\";" . PHP_EOL;
+                        $txt = "</ul>" . PHP_EOL;
                         fwrite($myfile, $txt);
                     }
                     else
                     {
-                        $txt = "echo \"<li>\";" . PHP_EOL;
+                        $txt = "<li>" . PHP_EOL;
                         fwrite($myfile, $txt);
-                        $txt = "echo \"<a href=\\\"#\\\">" . $row["RIPART_GEO"] . "</a>\";" . PHP_EOL;
+                        $txt = "<a href=\"#\">" . $row["RIPART_GEO"] . "</a>" . PHP_EOL;
                         fwrite($myfile, $txt);
                     }
                     
-                    $txt = "echo \"</li>\";" . PHP_EOL;
+                    $txt = "</li>" . PHP_EOL;
                     fwrite($myfile, $txt);
                 }
     }
     
     
-    $txt = "echo \"</ul>\";" . PHP_EOL;
+    $txt = "</ul>" . PHP_EOL;
     fwrite($myfile, $txt);
-    $txt = "?>";
-    fwrite($myfile, $txt);
+    
     fclose($myfile);
     
 ?>
