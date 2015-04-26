@@ -22,11 +22,11 @@
             die($conn->error);
         
         while($row = $result->fetch_object()) 
-                $data[] = $row;
+            $data[] = $row;
         
         echo json_encode($data);
         
-        }
+    }
     else if($_GET["cod_com"]){
         
         $sql = "SELECT COD_COMUNE, log(convert(totale,unsigned)/100) as TOTALE FROM soldipubblici_notebook.comuni_totalespese WHERE COD_COMUNE = '" . $_GET["cod_com"] . "' ;";

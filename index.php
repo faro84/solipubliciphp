@@ -13,8 +13,10 @@
     <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
     <!-- Custom Styles-->
     <link href="assets/css/custom-styles.css" rel="stylesheet" />
+    <link href="assets/css/jquery-ui.min.css" rel="stylesheet" />
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    
     <?php
     
         include_once('php/connection.php');
@@ -349,6 +351,7 @@
     <!-- JS Scripts-->
     <!-- jQuery Js -->
     <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="assets/js/jquery-ui-1.10.4.custom.min.js"></script>
     <!-- Bootstrap Js -->
     <script src="assets/js/bootstrap.min.js"></script>
 	 
@@ -397,6 +400,7 @@
     	
     <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
+    <script src="assets/js/autocompletesearch.js"></script>
 
 </body>
 

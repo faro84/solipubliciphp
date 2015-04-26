@@ -71,7 +71,9 @@
                     </div>
                 </div>
 				
-		
+		<label>Text Input</label>
+                                            <input id="country_name" class="form-control">
+                
 		<div class="row">
 			<div class="col-xs-6 col-md-3">
 				<div class="panel panel-default">

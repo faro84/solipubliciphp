@@ -95,8 +95,7 @@
             url: 'php/chart.php?cod_rip=' + obj ,
 
             success: function (obj) {
-                        //console.log("porca madonna");
-                        console.log(obj);
+                console.log(obj);
             }
         });
         
