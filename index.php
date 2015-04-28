@@ -370,34 +370,26 @@
         {
             $content = $_GET["content"];
             if($content == "table" || $content == "rip" || $content == "com"){
-    ?>          
+        ?>          
                 <script src="assets/js/d3.min.js" charset="utf-8" ></script>
                 <script src="assets/js/dataTables/jquery.dataTables.js"></script>
                 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
                 <script src="assets/js/simplechart.js"></script>
                 <script>
                     $(document).ready(function () {
-                    $('#dataTables-example').dataTable();
+                        $('#dataTables-example').dataTable();
                     });
                 </script>
               
-            <?php}
-        if($content == "rip"){
-         ?>
-                <script type="text/javascript">
-                    generateRipartizioneChart(<?php echo "\"" . $_GET["cod_rip"] . "\""; ?>);
-                </script>
-    <?php    }
-    if($content == "com"){
-         ?>
-                <script type="text/javascript">
-                    generateComuneChart(<?php echo "\"" . $_GET["cod_com"] . "\""; ?>);
-                </script>
-    <?php    }
-        }
+        <?php }
+                    if($content == "rip") {
+                        $string = "generateRipartizioneChart(\"" . $_GET["cod_rip"] . "\")";
+                    } else if ($content == "com") {
+                        $string = "generateComuneChart(\"" . $_GET["cod_com"] . "\")";
+        }}
+        ?>
     
-    ?>
-    	
+    <script type="text/javascript"> <?php if(isset($string)) echo $string; ?> </script>	
     <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
     <script src="assets/js/autocompletesearch.js"></script>

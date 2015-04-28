@@ -749,5 +749,40 @@
                     </div>
                     <!--End Advanced Tables -->
                 </div>
-            </div>     
+            </div>
+                <div id="myOutput">10</div>
+            <div class="row">
+                <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Tasks Panel
+                            </div>
+                            <div class="panel-body">
+                                <div class="list-group-mine" id="porchio">
+                                    <?php
+                                        global $start;
+                                        global $off;
+                                        $start = 0;
+                                        $off = 10;
+                                        include "php/easycomune.php";
+                                    ?>
+                                </div>
+                                <div>
+                                    <a href="javascript:AlertIt();" class="text-left">Previous Tasks <i class="fa fa-arrow-circle-left"></i></a>
+                                    <a href="#" class="text-right">Next Tasks <i class="fa fa-arrow-circle-right"></i></a>
+                                    <!--<a href="#">Next Tasks <i class="fa fa-arrow-circle-left"></i></a>-->
+                                </div>
+                            </div>
+                        </div>
 
+                    </div>
+            </div>
+                
+                <script type="text/javascript">
+                    function AlertIt() {
+                        <?php $start = $start + 10; ?>
+                        $("#porchio").load("php/easycomune.php?cod_com=" + <?php echo $_GET["cod_com"] ?> + "&&cod_prov=" + <?php echo $_GET["cod_prov"] ?> + "start=" + document.getElementById('myOutput').innerHTML + "&&off=10", function () {
+                            window.alert('Request complete');
+                        });
+                    }
+                </script>

@@ -38,7 +38,8 @@ $('#country_name').autocomplete({
 							 response( $.map( data, function( item ) {
 								return {
 									label: item.DESCR_COMUNE,
-									value: item.COD_COMUNE,
+									value: "cod_com=" + item.COD_COMUNE + 
+                                                                                "&&cod_prov=" + item.COD_PROVINCIA,
 								}
 							}));
 						}
@@ -52,8 +53,7 @@ $('#country_name').autocomplete({
 		      	minLength: 0,
                         change: function (event, ui)
                         {
-                            window.location.href = "index.php?content=com&cod_com=" + ui.item.value;
-                            console.log("cristosi");
+                            window.location.href = "index.php?content=com&&" + ui.item.value;
                             console.log(event);
                             console.log(ui);
                         }

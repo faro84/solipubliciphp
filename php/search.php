@@ -14,7 +14,7 @@
     
     if($_GET['type'] == 'country')
     {
-        $sql = "SELECT COD_COMUNE, DESCR_COMUNE FROM soldipubblici_notebook.anagrafe_comuni where DESCR_COMUNE LIKE '%".strtoupper($_GET['name_startsWith'])."%'";
+        $sql = "SELECT COD_COMUNE, COD_PROVINCIA, DESCR_COMUNE FROM soldipubblici_notebook.anagrafe_comuni where DESCR_COMUNE LIKE '%".strtoupper($_GET['name_startsWith'])."%'";
         
 	$result = $conn->query($sql);	
         
