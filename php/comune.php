@@ -781,7 +781,8 @@
                 <script type="text/javascript">
                     function AlertIt() {
                         <?php $start = $start + 10; ?>
-                        $("#porchio").load("php/easycomune.php?cod_com=" + <?php echo $_GET["cod_com"] ?> + "&&cod_prov=" + <?php echo $_GET["cod_prov"] ?> + "start=" + document.getElementById('myOutput').innerHTML + "&&off=10", function () {
+                        console.log(<?php echo $_GET["cod_com"]; ?>);
+                        $("#porchio").load("php/easycomune.php?cod_com=" + "<?php echo "" . $_GET["cod_com"]; ?>" + "&&cod_prov=" + "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + document.getElementById('myOutput').innerHTML + "&&off=10", function () {
                             window.alert('Request complete');
                         });
                     }

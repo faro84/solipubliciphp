@@ -12,7 +12,7 @@
         $start = $_GET["start"];
         $off = $_GET["off"];
         $cod_com = $_GET["cod_com"];
-        $cod_prov = $_GET["$cod_prov"];
+        $cod_prov = $_GET["cod_prov"];
     }
     GetComuniSpeseTabella2($start, $off);
     
@@ -63,7 +63,7 @@
         
         $limit = $end;
         $sql = "SELECT * FROM soldipubblici_notebook.comuni_totalespese_per_tipologia where cod_comune = '" . $_GET["cod_com"] . "' && cod_provincia= '" . $_GET["cod_prov"] . "' ORDER BY TOTALE DESC LIMIT " . $limit . " OFFSET " . $start . ";";
-        //echo $sql;
+        echo $sql;
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // output data of each row
