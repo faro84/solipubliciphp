@@ -72,7 +72,7 @@
                 </div>
 				
 		<label>Text Input</label>
-                                            <input id="country_name" class="form-control">
+                <input id="country_name" class="form-control">
                 
 		<div class="row">
 			<div class="col-xs-6 col-md-3">
@@ -151,18 +151,20 @@
                     </div>
 
                 </div>
-				<div class="row">
-				<div class="col-md-12">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							Area Chart
-						</div>
-						<div class="panel-body">
-							<div id="morris-area-chart"></div>
-						</div>
-					</div>  
-					</div>		
-				</div> 	
+                
+		<div class="row">
+                    <div class="col-md-12">
+			<div class="panel panel-default">
+                            <div class="panel-heading">
+                                Area Chart
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-area-chart"></div>
+                            </div>
+			</div>  
+                    </div>		
+		</div>
+                
                 <!-- /. ROW  -->
 
 	   

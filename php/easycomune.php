@@ -73,7 +73,9 @@
                 echo "<i class=\"fa fa-fw fa-comment\"></i>" . $row["DESCRIZIONE"];
                 echo "</a>";
             }
-        } 
+        }
+        
+        $conn->close();
 //        else {
 //        }
 //        echo "</tbody>";
