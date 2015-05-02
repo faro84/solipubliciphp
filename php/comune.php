@@ -43,7 +43,7 @@
                             </div>
                         </div>
                     </div>
-<!--                    <div class="col-md-3 col-sm-12 col-xs-12">
+                    <div class="col-md-3 col-sm-12 col-xs-12">
                         <div class="panel panel-primary text-center no-boder bg-color-brown brown">
                             <div class="panel-left pull-left brown">
                                 <i class="fa fa-users fa-5x"></i>
@@ -55,7 +55,7 @@
 
                             </div>
                         </div>
-                    </div>-->
+                    </div>
                 </div>
     <!-- /. ROW  -->
     
@@ -797,6 +797,21 @@
                         </div>
                         <div class="panel-body">
                             <svg id="chart"></svg>
+                        </div>
+                    </div>
+                    <!--End Advanced Tables -->
+                </div>
+            </div>
+                
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- Advanced Tables -->
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             Advanced Tables
+                        </div>
+                        <div class="panel-body">
+                            <svg id="scatter"></svg>
                         </div>
                     </div>
                     <!--End Advanced Tables -->

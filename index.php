@@ -35,16 +35,29 @@
             font: 10px sans-serif;
         }
 
+        path { 
+            stroke: steelblue;
+            stroke-width: 2;
+            fill: none;
+        }
+
         .axis path,
         .axis line {
             fill: none;
-            stroke: #000;
+            stroke: grey;
+            stroke-width: 1;
             shape-rendering: crispEdges;
         }
 
-        .x.axis path {
+/*        .x.axis path {
             display: none;
+        }*/
+
+
+        .dot {
+          stroke: #000;
         }
+
 
     </style> 
     
@@ -385,7 +398,7 @@
                     if($content == "rip") {
                         $string = "generateRipartizioneChart(\"" . $_GET["cod_rip"] . "\")";
                     } else if ($content == "com") {
-                        $string = "generateComuneChart(\"" . $_GET["cod_com"] . "\")";
+                        $string = "generateComuneChart(\"cod_com=" . $_GET["cod_com"] . "&&cod_prov=" . $_GET["cod_prov"] . "\")";
         }}
         ?>
     
