@@ -14,6 +14,22 @@
     <!-- Custom Styles-->
     <link href="assets/css/custom-styles.css" rel="stylesheet" />
     <link href="assets/css/jquery-ui.min.css" rel="stylesheet" />
+    <!-- jQuery Js -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+    <script src="assets/js/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+	 
+    <!-- Metis Menu Js -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+    <!-- Morris Chart Js -->
+    <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="assets/js/morris/morris.js"></script>
+	
+    <script src="assets/js/easypiechart.js"></script>
+    <script src="assets/js/easypiechart-data.js"></script>
+    <script src="assets/js/d3.min.js" charset="utf-8" ></script>
+    <script src="assets/js/dataTables/jquery.dataTables.js"></script>
+    
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
     
@@ -49,9 +65,20 @@
             shape-rendering: crispEdges;
         }
 
-/*        .x.axis path {
-            display: none;
-        }*/
+        .svg-container {
+            display: inline-block;
+            position: relative;
+            width: 100%;
+            padding-bottom: 100%; /* aspect ratio */
+            vertical-align: top;
+            overflow: hidden;
+        }
+        .svg-content-responsive {
+            display: inline-block;
+            position: absolute;
+            top: 10px;
+            left: 0;
+        }
 
 
         .dot {
@@ -362,30 +389,15 @@
     </div>
     <!-- /. WRAPPER  -->
     <!-- JS Scripts-->
-    <!-- jQuery Js -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
-    <script src="assets/js/jquery-ui-1.10.4.custom.min.js"></script>
     <!-- Bootstrap Js -->
-    <script src="assets/js/bootstrap.min.js"></script>
-	 
-    <!-- Metis Menu Js -->
-    <script src="assets/js/jquery.metisMenu.js"></script>
-    <!-- Morris Chart Js -->
-    <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
-    <script src="assets/js/morris/morris.js"></script>
-	
-    <script src="assets/js/easypiechart.js"></script>
-    <script src="assets/js/easypiechart-data.js"></script>
-
+    
     <?php 
     
         if(isset($_GET["content"]))
         {
             $content = $_GET["content"];
             if($content == "table" || $content == "rip" || $content == "com"){
-        ?>          
-                <script src="assets/js/d3.min.js" charset="utf-8" ></script>
-                <script src="assets/js/dataTables/jquery.dataTables.js"></script>
+        ?>
                 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
                 <script src="assets/js/simplechart.js"></script>
                 <script>
@@ -393,26 +405,7 @@
                         $('#dataTables-example').dataTable();
                     });
                     
-                    $("#previousButton").click(function(event)
-                    {
-                        if(document.getElementById('myOutput').innerHTML != "10"){
-                            $("#porchio").load("php/completetablecomune.php?cod_com=" + 
-                                "<?php echo "" . $_GET["cod_com"]; ?>" + "&&cod_prov=" + 
-                                "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
-                                document.getElementById('myOutput').innerHTML + "&&off=10");
-                            $("#myOutput").load(document.getElementById('myOutput').innerHTML - 10);
-                            $('#porchio').scrollView();
-                        }
-                    });
-                    $("#nextButton").click(function(event)
-                    {
-                        $("#porchio").load("php/completetablecomune.php?cod_com=" + 
-                                "<?php echo "" . $_GET["cod_com"]; ?>" + "&&cod_prov=" + 
-                                "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
-                                document.getElementById('myOutput').innerHTML + "&&off=10");
-                        $("#myOutput").load(document.getElementById('myOutput').innerHTML + 10);
-                        $('#porchio').scrollView();
-                    });
+                    
                 </script>
         <?php }
                     if($content == "rip") {

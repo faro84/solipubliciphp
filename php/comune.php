@@ -74,7 +74,7 @@
         </div>
     </div>
                 
-            <div class="row">
+            <div class="row" id="row1">
                 <div class="col-md-12">
                     <!-- Advanced Tables -->
                     <div class="panel panel-default">
@@ -82,7 +82,7 @@
                              Advanced Tables
                         </div>
                         <div class="panel-body">
-                            <svg id="scatter"></svg>
+                           <svg id="scatter"></svg>
                         </div>
                     </div>
                     <!--End Advanced Tables -->
@@ -128,10 +128,36 @@
                                     </table>
                                 </div>
                                 <div class="buttonsPreviousNext">
-                                    <a href="#" id="previousButton" class="text-left">Previous Tasks <i class="fa fa-arrow-circle-left"></i></a>
+                                    <a href="#" id="previousButton" class="text-left"> <i class="fa fa-arrow-circle-left"></i>Previous Tasks</a>
                                     <a href="#" id="nextButton" class="text-right">Next Tasks <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a href="#1" id="link1"></a>
                                 </div>
                             </div>
                         </div>
                 </div>
             </div>
+            
+            <script>
+                $("#previousButton").click(function(event)
+                    {
+                        if(document.getElementById('myOutput').innerHTML != "10"){
+                            $("#porchio").load("php/completetablecomune.php?cod_com=" + 
+                                "<?php echo "" . $_GET["cod_com"]; ?>" + "&&cod_prov=" + 
+                                "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
+                                document.getElementById('myOutput').innerHTML + "&&off=10");
+                            document.getElementById('myOutput').innerHTML = 
+                                    parseInt(document.getElementById('myOutput').innerHTML) - 10;
+                            document.getElementById('link1').scrollIntoView();
+                        }
+                    });
+                    $("#nextButton").click(function(event)
+                    {
+                        $("#porchio").load("php/completetablecomune.php?cod_com=" + 
+                                "<?php echo "" . $_GET["cod_com"]; ?>" + "&&cod_prov=" + 
+                                "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
+                                document.getElementById('myOutput').innerHTML + "&&off=10");
+                        document.getElementById('myOutput').innerHTML = 
+                                parseInt(document.getElementById('myOutput').innerHTML) + 10;
+                        document.getElementById('link1').scrollIntoView();
+                    });
+            </script>

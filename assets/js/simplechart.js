@@ -212,9 +212,11 @@
     
     function GenerateComunePlot(obj) {
         // Set the dimensions of the canvas / graph
-        var margin = {top: 20, right: 50, bottom: 30, left: 100},
-            width = 1260 - margin.left - margin.right,
+        var margin = {top: 20, right: 70, bottom: 30, left: 100},
+            width = parseInt(d3.select('#row1').style('width'), 10) - margin.left - margin.right,
             height = 400 - margin.top - margin.bottom;
+
+        console.log(parseInt(d3.select('#row1').style('width'), 10));
 
         // Parse the date / time
         var parseDate = d3.time.format("%d-%m-%Y").parse;
