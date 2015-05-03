@@ -5,12 +5,11 @@
     if(isset($_GET["start"])){
         $start = $_GET["start"];
         $off = $_GET["off"];
-        $cod_com = $_GET["cod_com"];
         $cod_prov = $_GET["cod_prov"];
     }
-    GetComuniSpeseTabellaComplete($start, $off);
+    GetProvinciaSpeseTabellaComplete($start, $off);
     
-    function GetComuniSpeseTabellaComplete($start, $end)
+    function GetProvinciaSpeseTabellaComplete($start, $end)
     {
         echo "<thead>";
         echo "<tr>";
@@ -44,11 +43,13 @@
             public $anno1;
             public $anno2;
             public $anno3;
+            public $anno4;
+            public $codcomune;
         }
         
         $limit = $end;
-        $sql = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale_per_tipologia " .
-                "where cod_comune = '" . $_GET["cod_com"] . "' && cod_provincia= '" . $_GET["cod_prov"] . 
+        $sql = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale " .
+                "where cod_provincia= '" . $_GET["cod_prov"] . 
                 "' ORDER BY TOTALE DESC LIMIT " . $limit . " OFFSET " . $start . ";";
         //echo $sql;
         $result = $conn->query($sql);
@@ -58,52 +59,58 @@
             while($row = $result->fetch_assoc())
             {
                 $tableelement = new TableElement();
+                $tableelement->codcomune = $row["COD_COMUNE"];
                 $tableelement->totale = $row["TOTALE"];
-                $tableelement->descrizione = $row['DESCRIZIONE'];
                 $tableelement->totalepersona = $row['TOTALEPERCITTADINO'];
                 $tableelement->anno1 = "0";
                 $tableelement->anno2 = "0";
                 $tableelement->anno3 = "0";
+                $tableelement->anno4 = "0";
                 array_push($tableElements, $tableelement);
             }
         }
         
         foreach($tableElements as $tableElement)
         {
-            $sql2 = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale_per_anno_per_tipologia "
-                    . "where descrizione = '" . $tableElement->descrizione ."' "
-                    . "and cod_comune = '" . $_GET["cod_com"] . "' && cod_provincia= '" . $_GET["cod_prov"] . "';";
+            $sql2 = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale_per_anno "
+                    . "where cod_comune = '" . $tableElement->codcomune . "' and "
+                    . "cod_provincia= '" . $_GET["cod_prov"] . "';";
             //echo $sql2;
             $result2 = $conn->query($sql2);
             if ($result2->num_rows > 0)
             {
                 while($row2 = $result2->fetch_assoc())
                 {
-                    if($row2['ANNO'] == "2013"){
+                    if($row2['ANNO'] == "2012"){
                         $tableElement->anno1 = $row2['TOTALE'];
                     }
-                    else if($row2['ANNO'] == "2014"){
+                    if($row2['ANNO'] == "2013"){
                         $tableElement->anno2 = $row2['TOTALE'];
                     }
-                    else if($row2['ANNO'] == "2015"){
+                    else if($row2['ANNO'] == "2014"){
                         $tableElement->anno3 = $row2['TOTALE'];
+                    }
+                    else if($row2['ANNO'] == "2015"){
+                        $tableElement->anno4 = $row2['TOTALE'];
                     }
                 }
             }
         }
-        
+        $index = 1;
         foreach($tableElements as $tableElement)
         {
             echo "<tr>";
-            echo "<td>1</td>";
-            echo "<td>" . $tableElement->descrizione . "<span class=\"badge\" style=\"float:right\">" . $tableElement->descrizione . "</span></td>";
+            echo "<td>" . $index . "</td>";
+            echo "<td>" . $tableElement->codcomune . "</td>";
             echo "<td>" . $tableElement->totale . "</td>";
-            echo "<td>" . $tableElement->anno1 . "</td>";
             echo "<td>" . $tableElement->anno2 . "</td>";
             echo "<td>" . $tableElement->anno3 . "</td>";
+            echo "<td>" . $tableElement->anno4 . "</td>";
             echo "</tr>";
+            $index++;
         }
         
         $conn->close();
         echo "</tbody>";
     }
+

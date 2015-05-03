@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-md-12">
         <h1 class="page-header">
-            Comune page <small>Responsive tables</small>
+            <?php include "php/getheadercomune.php" ?> <small>Responsive tables</small>
         </h1>
     </div>
 </div>
@@ -58,13 +58,37 @@
                     </div>
                 </div>
     <!-- /. ROW  -->
+    
+    <div class="row">
+                <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Responsive Table Example
+                            </div> 
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover" id="porchio">
+                                        <?php
+                                        include "php/completetablecomune.php";
+                                        ?>
+                                    </table>
+                                </div>
+                                <div class="buttonsPreviousNext">
+                                    <a href="#" id="previousButton" class="text-left"> <i class="fa fa-arrow-circle-left"></i>Previous Tasks</a>
+                                    <a href="#" id="nextButton" class="text-right">Next Tasks <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a href="#1" id="link1"></a>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
             
     <div class="row">
         <div class="col-md-12">
             <!-- Advanced Tables -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Advanced Tables
+                    Spese Totali Comune 
                 </div>
                 <div class="panel-body">
                     <svg id="chart"></svg>
@@ -111,30 +135,6 @@
                         </div>
 
                     </div>
-            </div>
-            
-            <div class="row">
-                <div class="col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Responsive Table Example
-                            </div> 
-                            <div class="panel-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover" id="porchio">
-                                        <?php
-                                        include "php/completetablecomune.php";
-                                        ?>
-                                    </table>
-                                </div>
-                                <div class="buttonsPreviousNext">
-                                    <a href="#" id="previousButton" class="text-left"> <i class="fa fa-arrow-circle-left"></i>Previous Tasks</a>
-                                    <a href="#" id="nextButton" class="text-right">Next Tasks <i class="fa fa-arrow-circle-right"></i></a>
-                                    <a href="#1" id="link1"></a>
-                                </div>
-                            </div>
-                        </div>
-                </div>
             </div>
             
             <script>

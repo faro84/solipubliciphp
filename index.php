@@ -101,7 +101,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><b>In</b>sight</a>
+                <a class="navbar-brand" href="index.php"><b>In</b>sight</a>
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
@@ -372,6 +372,8 @@
                             include("php/ripartizione_geografica.php");
                         if($content == "com")
                             include("php/comune.php");
+                        if($content == "prov")
+                            include("php/provincia.php");
                     }
                     else
                     {
@@ -396,7 +398,7 @@
         if(isset($_GET["content"]))
         {
             $content = $_GET["content"];
-            if($content == "table" || $content == "rip" || $content == "com"){
+            if($content == "table" || $content == "rip" || $content == "com" || $content == "prov"){
         ?>
                 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
                 <script src="assets/js/simplechart.js"></script>
@@ -412,6 +414,9 @@
                         $string = "generateRipartizioneChart(\"" . $_GET["cod_rip"] . "\")";
                     } else if ($content == "com") {
                         $string = "generateComuneChart(\"cod_com=" . $_GET["cod_com"] . "&&cod_prov=" . $_GET["cod_prov"] . "\")";
+                    }
+                    else if ($content == "prov") {
+                        $string = "generateProvinciaChart(\"cod_prov=" . $_GET["cod_prov"] . "\")";
         }}
         ?>
     

@@ -137,6 +137,10 @@
         GenerateComunePlot(obj);
     }; 
     
+    function generateProvinciaChart(obj) {
+        
+    }; 
+    
     function GenerateComuneTestChart(obj) {
         var margin = {top: 20, right: 50, bottom: 30, left: 100},
         width = 1260 - margin.left - margin.right,
