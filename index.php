@@ -392,8 +392,28 @@
                     $(document).ready(function () {
                         $('#dataTables-example').dataTable();
                     });
+                    
+                    $("#previousButton").click(function(event)
+                    {
+                        if(document.getElementById('myOutput').innerHTML != "10"){
+                            $("#porchio").load("php/completetablecomune.php?cod_com=" + 
+                                "<?php echo "" . $_GET["cod_com"]; ?>" + "&&cod_prov=" + 
+                                "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
+                                document.getElementById('myOutput').innerHTML + "&&off=10");
+                            $("#myOutput").load(document.getElementById('myOutput').innerHTML - 10);
+                            $('#porchio').scrollView();
+                        }
+                    });
+                    $("#nextButton").click(function(event)
+                    {
+                        $("#porchio").load("php/completetablecomune.php?cod_com=" + 
+                                "<?php echo "" . $_GET["cod_com"]; ?>" + "&&cod_prov=" + 
+                                "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
+                                document.getElementById('myOutput').innerHTML + "&&off=10");
+                        $("#myOutput").load(document.getElementById('myOutput').innerHTML + 10);
+                        $('#porchio').scrollView();
+                    });
                 </script>
-              
         <?php }
                     if($content == "rip") {
                         $string = "generateRipartizioneChart(\"" . $_GET["cod_rip"] . "\")";

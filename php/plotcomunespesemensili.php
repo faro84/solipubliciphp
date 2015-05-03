@@ -12,7 +12,7 @@
     //$con = mysqli_connect("localhost","root","root","soldipubblici_notebook") or die("Some error occurred during connection " . mysqli_error($con)); 
     if($_GET["cod_com"]){
         
-        $sql = "SELECT ANNO, PERIODO, TOTALE, TOTALEPERCITTADINO FROM soldipubblici_notebook.comune_spesatotale_per_mese_per_anno "
+        $sql = "SELECT ANNO, PERIODO, TOTALE, TOTALEPERCITTADINO FROM soldipubblici_notebook.comuni_spesatotale_per_mese_per_anno "
                 . "where cod_comune = '" . $_GET["cod_com"] .  "' and cod_provincia = '" . $_GET["cod_prov"] .  "'"
                 . " ORDER BY ANNO, PERIODO ASC;";
         $result = $con->query($sql);

@@ -15,7 +15,7 @@
     
     if(isset($_GET["cod_rip"])){
         
-        $sql = "SELECT COD_REGIONE, TOTALE FROM soldipubblici_notebook.regioni_totalespese where COD_RIPARTIZIONE = '" . $_GET["cod_rip"] . "';";
+        $sql = "SELECT COD_REGIONE, TOTALE FROM soldipubblici_notebook.regioni_spesatotale where COD_RIPARTIZIONE = '" . $_GET["cod_rip"] . "';";
         $result = $conn->query($sql);
         
         if( !$result)
@@ -29,7 +29,7 @@
     }
     else if($_GET["cod_com"]){
         
-        $sql = "SELECT COD_COMUNE, log(convert(totale,unsigned)/100) as TOTALE FROM soldipubblici_notebook.comuni_totalespese WHERE COD_COMUNE = '" . $_GET["cod_com"] . "' ;";
+        $sql = "SELECT COD_COMUNE, log(convert(totale,unsigned)/100) as TOTALE FROM soldipubblici_notebook.comuni_spesatotale WHERE COD_COMUNE = '" . $_GET["cod_com"] . "' ;";
         $result = $con->query($sql);
         
         if( !$result)

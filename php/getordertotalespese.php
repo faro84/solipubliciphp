@@ -16,7 +16,7 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT * FROM soldipubblici_notebook.comuni_totalespese " . 
+    $sql = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale " . 
                 "where cod_comune = '" . $_GET["cod_com"] . "' && cod_provincia= '" . $_GET["cod_prov"] . "';";
     //echo $sql;
     $result = $conn->query($sql);

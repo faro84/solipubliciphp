@@ -47,7 +47,7 @@
         }
         
         $limit = $end;
-        $sql = "SELECT * FROM soldipubblici_notebook.comuni_totalespese_per_tipologia " .
+        $sql = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale_per_tipologia " .
                 "where cod_comune = '" . $_GET["cod_com"] . "' && cod_provincia= '" . $_GET["cod_prov"] . 
                 "' ORDER BY TOTALE DESC LIMIT " . $limit . " OFFSET " . $start . ";";
         //echo $sql;
@@ -70,7 +70,7 @@
         
         foreach($tableElements as $tableElement)
         {
-            $sql2 = "SELECT * FROM soldipubblici_notebook.comune_spesatotale_per_anno_per_tipologia "
+            $sql2 = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale_per_anno_per_tipologia "
                     . "where descrizione = '" . $tableElement->descrizione ."' "
                     . "and cod_comune = '" . $_GET["cod_com"] . "' && cod_provincia= '" . $_GET["cod_prov"] . "';";
             //echo $sql2;
