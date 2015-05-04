@@ -19,11 +19,13 @@
     if ($result->num_rows > 0)
     {
         while($row = $result->fetch_assoc()) {
-            echo "<a href=\"index.php?content=reg&&cod_reg=" . $row["cod_regione"] ."\">" . 
-                    $row["descrizione_regione"] ."</a>" . " // ". 
-                    "<a href=\"index.php?content=prov&&cod_prov=" . $_GET["cod_prov"] ."\">" . 
-                    $row["descrizione_provincia"] ."</a>" . " // ". 
-                    $row["descr_comune"];
+            echo "<a href=\"index.php?content=rip&&cod_rip=" . $row["ripart_geo"] ."\">" . 
+                $row["ripart_geo"] ."</a>" . " // ". 
+                "<a href=\"index.php?content=reg&&cod_reg=" . $row["cod_regione"] ."\">" . 
+                $row["descrizione_regione"] ."</a>" . " // ". 
+                "<a href=\"index.php?content=prov&&cod_prov=" . $_GET["cod_prov"] ."\">" . 
+                $row["descrizione_provincia"] ."</a>" . " // ". 
+                $row["descr_comune"];
         }
     }
     $conn->close();

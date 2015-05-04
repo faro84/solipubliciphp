@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-md-12">
         <h1 class="page-header">
-            <?php include "php/header/getheaderprovincia.php" ?> <small>Provincia</small>
+            <?php include "php/header/getheaderripartizione.php" ?> <small>Ripartizione</small>
         </h1>
     </div>
 </div>
@@ -14,7 +14,7 @@
                 <i class="fa fa-bar-chart-o fa-5x"></i>                
             </div>
             <div class="panel-right pull-right">
-                <h3><?php include "php/getprovinciaordertotalespese.php" ?></h3>
+                <h3><?php include "php/getripartizioneordertotalespese.php" ?></h3>
                 <strong> Daily Visits</strong>
             </div>
         </div>
@@ -69,7 +69,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover" id="porchio">
                             <?php
-                                include "php/completetableprovincia.php";
+                                include "php/completetableripartizione.php";
                             ?>
                         </table>
                     </div>
@@ -104,8 +104,8 @@
         {
             if(document.getElementById('myOutput').innerHTML != "10")
             {
-                $("#porchio").load("php/completetableprovincia.php?cod_prov=" + 
-                    "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
+                $("#porchio").load("php/completetableripartizione.php?cod_rip=" + 
+                    "<?php echo "" . $_GET["cod_rip"] ?>" + "&&start=" + 
                     document.getElementById('myOutput').innerHTML + "&&off=10");
                 document.getElementById('myOutput').innerHTML = 
                     parseInt(document.getElementById('myOutput').innerHTML) - 10;
@@ -114,11 +114,12 @@
         });
         $("#nextButton").click(function(event)
         {
-            $("#porchio").load("php/completetableprovincia.php?cod_prov=" + 
-                "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
+            $("#porchio").load("php/completetableripartizione.php?cod_rip=" + 
+                "<?php echo "" . $_GET["cod_rip"] ?>" + "&&start=" + 
                 document.getElementById('myOutput').innerHTML + "&&off=10");
             document.getElementById('myOutput').innerHTML = 
                 parseInt(document.getElementById('myOutput').innerHTML) + 10;
             document.getElementById('link1').scrollIntoView();
         });
     </script>
+

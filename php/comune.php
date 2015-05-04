@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="page-header">
-                <?php include "php/getheadercomune.php" ?> <small>Responsive tables</small>
+                <?php include "php/header/getheadercomune.php" ?> <small>Responsive tables</small>
             </h1>
         </div>
     </div>

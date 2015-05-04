@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-md-12">
         <h1 class="page-header">
-            <?php include "php/getheaderregione.php" ?> <small>Regione</small>
+            <?php include "php/header/getheaderregione.php" ?> <small>Regione</small>
         </h1>
     </div>
 </div>
@@ -104,7 +104,7 @@
         {
             if(document.getElementById('myOutput').innerHTML != "10")
             {
-                $("#porchio").load("php/completetableregione.php?cod_prov=" + 
+                $("#porchio").load("php/completetableregione.php?cod_reg=" + 
                     "<?php echo "" . $_GET["cod_reg"] ?>" + "&&start=" + 
                     document.getElementById('myOutput').innerHTML + "&&off=10");
                 document.getElementById('myOutput').innerHTML = 
@@ -114,7 +114,7 @@
         });
         $("#nextButton").click(function(event)
         {
-            $("#porchio").load("php/completetableregione.php?cod_prov=" + 
+            $("#porchio").load("php/completetableregione.php?cod_reg=" + 
                 "<?php echo "" . $_GET["cod_reg"] ?>" + "&&start=" + 
                 document.getElementById('myOutput').innerHTML + "&&off=10");
             document.getElementById('myOutput').innerHTML = 
