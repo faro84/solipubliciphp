@@ -15,7 +15,7 @@
         
         $limit = $end;
         $sql = "SELECT * FROM soldipubblici_notebook.enti_spesatotale "
-                . "where cod_comune = '" . $_GET["cod_com"] . "' && cod_provincia= '" . $_GET["cod_prov"] . "' "
+                . "where cod_comune = '' && cod_provincia= '" . $_GET["cod_prov"] . "' "
                 . "ORDER BY TOTALE DESC;";
         echo $sql;
         $result = $conn->query($sql);

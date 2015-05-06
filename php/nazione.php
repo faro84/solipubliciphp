@@ -1,8 +1,7 @@
-    
 <div class="row">
     <div class="col-md-12">
         <h1 class="page-header">
-            <?php include "php/header/getheaderprovincia.php" ?> <small>Provincia</small>
+            <?php include "php/header/getheadernazione.php" ?> <small>Regione</small>
         </h1>
     </div>
 </div>
@@ -14,7 +13,7 @@
                 <i class="fa fa-bar-chart-o fa-5x"></i>                
             </div>
             <div class="panel-right pull-right">
-                <h3><?php include "php/getprovinciaordertotalespese.php" ?></h3>
+                <h3></h3>
                 <strong> Daily Visits</strong>
             </div>
         </div>
@@ -69,7 +68,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover" id="porchio">
                             <?php
-                                include "php/completetableprovincia.php";
+                                echo "ciaociaoino";
                             ?>
                         </table>
                     </div>
@@ -83,49 +82,37 @@
         </div>
     </div>
         
-<!--    <div class="row" id="row1">
+    <div class="row" id="row1">
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Advanced Tables
                 </div>
                 <div class="panel-body">
-                    <svg id="scatter"></svg>
-                </div>
-            </div>
-        </div>
-    </div>-->
-                
-    <div id="myOutput" style="display: none;">10</div>
-    
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    Enti Panel
-                </div>
-                <div class="panel-body">
-                    <div class="list-group-mine">
-                        <?php
-                            global $start;
-                            global $off;
-                            $start = 0;
-                            $off = 10;
-                            include "php/getentiprovincia.php";
-                        ?>
+                    <div id="main">
+                        <div id="sequence"></div>
+                        <div id="chart">
+                          <div id="explanation" style="visibility: hidden;">
+                            <span id="percentage"></span><br/>
+                            of visits begin with this sequence of pages
+                          </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+                
+    <div id="myOutput" style="display: none;">10</div>
+            
     
     <script>
         $("#previousButton").click(function(event)
         {
             if(document.getElementById('myOutput').innerHTML != "10")
             {
-                $("#porchio").load("php/completetableprovincia.php?cod_prov=" + 
-                    "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
+                $("#porchio").load("php/completetableregione.php?cod_reg=" + 
+                    "<?php echo "" . $_GET["cod_reg"] ?>" + "&&start=" + 
                     document.getElementById('myOutput').innerHTML + "&&off=10");
                 document.getElementById('myOutput').innerHTML = 
                     parseInt(document.getElementById('myOutput').innerHTML) - 10;
@@ -134,11 +121,15 @@
         });
         $("#nextButton").click(function(event)
         {
-            $("#porchio").load("php/completetableprovincia.php?cod_prov=" + 
-                "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
+            $("#porchio").load("php/completetableregione.php?cod_reg=" + 
+                "<?php echo "" . $_GET["cod_reg"] ?>" + "&&start=" + 
                 document.getElementById('myOutput').innerHTML + "&&off=10");
             document.getElementById('myOutput').innerHTML = 
                 parseInt(document.getElementById('myOutput').innerHTML) + 10;
             document.getElementById('link1').scrollIntoView();
         });
+       
     </script>
+
+
+

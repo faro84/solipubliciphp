@@ -42,50 +42,13 @@
     
     <!-- Style  -->
     <style>
-        
-	.bar {
-            fill: steelblue;
+        <?php if(($_GET["content"]) == "naz"){
+            include("assets/css/sequence.css");
         }
-
-        .axis text {
-            font: 10px sans-serif;
+        else{
+            include("assets/css/index.css");
         }
-
-        path { 
-            stroke: steelblue;
-            stroke-width: 2;
-            fill: none;
-        }
-
-        .axis path,
-        .axis line {
-            fill: none;
-            stroke: grey;
-            stroke-width: 1;
-            shape-rendering: crispEdges;
-        }
-
-        .svg-container {
-            display: inline-block;
-            position: relative;
-            width: 100%;
-            padding-bottom: 100%; /* aspect ratio */
-            vertical-align: top;
-            overflow: hidden;
-        }
-        .svg-content-responsive {
-            display: inline-block;
-            position: absolute;
-            top: 10px;
-            left: 0;
-        }
-
-
-        .dot {
-          stroke: #000;
-        }
-
-
+        ?>
     </style> 
     
     
@@ -374,6 +337,8 @@
                             include("php/comune.php");
                         if($content == "prov")
                             include("php/provincia.php");
+                        if($content == "naz")
+                            include("php/nazione.php");
                     }
                     else
                     {
@@ -424,7 +389,7 @@
     <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
     <script src="assets/js/autocompletesearch.js"></script>
-
+     <script type="text/javascript" src="assets/js/sequence.js"></script>
 </body>
 
 </html>

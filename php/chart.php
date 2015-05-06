@@ -16,10 +16,10 @@
     if(isset($_GET["cod_rip"])){
         
         $sql = "SELECT COD_REGIONE, TOTALE FROM soldipubblici_notebook.regioni_spesatotale where COD_RIPARTIZIONE = '" . $_GET["cod_rip"] . "';";
-        $result = $conn->query($sql);
+        $result = $con->query($sql);
         
         if( !$result)
-            die($conn->error);
+            die($con->error);
         
         while($row = $result->fetch_object()) 
             $data[] = $row;
