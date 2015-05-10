@@ -62,7 +62,10 @@
         }
         
         $limit = $end;
-        $sql = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale_per_tipologia where cod_comune = '" . $_GET["cod_com"] . "' && cod_provincia= '" . $_GET["cod_prov"] . "' ORDER BY TOTALE DESC LIMIT " . $limit . " OFFSET " . $start . ";";
+        $sql = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale_per_tipologia "
+                . "where cod_comune = '" . $_GET["cod_com"] . "' && "
+                . "cod_provincia= '" . $_GET["cod_prov"] . "' ORDER BY TOTALE "
+                . "DESC LIMIT " . $limit . " OFFSET " . $start . ";";
         echo $sql;
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {

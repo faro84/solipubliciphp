@@ -339,6 +339,8 @@
                             include("php/provincia.php");
                         if($content == "naz")
                             include("php/nazione.php");
+                        if($content == "ccst")
+                            include("php/listacompletacomunispesetotali.php");
                     }
                     else
                     {
@@ -382,7 +384,8 @@
                     }
                     else if ($content == "prov") {
                         $string = "generateProvinciaChart(\"cod_prov=" . $_GET["cod_prov"] . "\")";
-        }}
+                    }
+        }
         ?>
     
     <script type="text/javascript"> <?php if(isset($string)) echo $string; ?> </script>	
