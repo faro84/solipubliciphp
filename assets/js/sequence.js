@@ -11,16 +11,21 @@ var radius = Math.min(width, height) / 2;
 
 // Breadcrumb dimensions: width, height, spacing, width of tip/tail.
 var b = {
-  w: 75, h: 30, s: 3, t: 10
+  w: 175, h: 30, s: 3, t: 10
 };
 
 // Mapping of step names to colors.
 var colors = {
-  "home": "#5687d1",
-  "product": "#7b615c",
-  "search": "#de783b",
-  "account": "#6ab975",
-  "other": "#a173d1",
+  "ITALIA NORD OCCIDENTALE": "#5687d1",
+  "ITALIA CENTRALE": "#7b615c",
+  "ITALIA INSULARE": "#de783b",
+  "ITALIA MERIDIONALE": "#6ab975",
+  "ITALIA NORD ORIENTALE": "#a173d1",
+  "ITALIA NORD OCCIDENTALE": "#5687d1",
+  "ITALIA CENTRALE": "#7b615c",
+  "ITALIA INSULARE": "#de783b",
+  "ITALIA MERIDIONALE": "#6ab975",
+  "ITALIA NORD ORIENTALE": "#a173d1",
   "end": "#bbbbbb"
 };
 
@@ -237,7 +242,7 @@ function drawLegend() {
 
   // Dimensions of legend item: width, height, spacing, radius of rounded rect.
   var li = {
-    w: 75, h: 30, s: 3, r: 3
+    w: 175, h: 30, s: 3, r: 3
   };
 
   var legend = d3.select("#legend").append("svg:svg")
