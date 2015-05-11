@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
         <h1 class="page-header">
-            <?php include "php/header/getheadernazione.php" ?> <small>Regione</small>
+            <?php include "php/header/getheadernazione.php" ?> <small>Nazione</small>
         </h1>
     </div>
 </div>
@@ -66,10 +66,8 @@
                 </div> 
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" id="porchio">
-                            <?php
-                                echo "ciaociaoino";
-                            ?>
+                        <table class="table table-striped table-bordered table-hover" id="tortanazione">
+                            <?php echo "ciaociaoino"; ?>
                         </table>
                     </div>
                     <div class="buttonsPreviousNext">
@@ -91,7 +89,7 @@
                 <div class="panel-body">
                     <div id="main">
                         <div id="sequence"></div>
-                        <div id="chart">
+                        <div id="charttortanazione">
                           <div id="explanation" style="visibility: hidden;">
                             <span id="percentage"></span><br/>
                             of visits begin with this sequence of pages

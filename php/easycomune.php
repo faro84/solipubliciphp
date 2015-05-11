@@ -66,7 +66,7 @@
                 . "where cod_comune = '" . $_GET["cod_com"] . "' && "
                 . "cod_provincia= '" . $_GET["cod_prov"] . "' ORDER BY TOTALE "
                 . "DESC LIMIT " . $limit . " OFFSET " . $start . ";";
-        echo $sql;
+        //echo $sql;
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // output data of each row

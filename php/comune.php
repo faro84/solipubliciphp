@@ -113,7 +113,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Tasks Panel
+                    <a href=<?php echo "index.php?content=sptc&&cod_com=" . $_GET["cod_com"] . "&&cod_prov=" . $_GET["cod_prov"] . ">Spese per tipologia panel</a>";?>
                 </div>
                 <div class="panel-body">
                     <div class="list-group-mine">

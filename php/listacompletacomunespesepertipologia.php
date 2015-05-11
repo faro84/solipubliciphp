@@ -2,7 +2,12 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="page-header">
-                Lista comuni per spese totali<small>Comuni</small>
+                <?php include "php/header/getheadercomune.php" ?> <small>Responsive tables</small>
+            </h1>
+        </div>
+        <div class="col-md-12">
+            <h1 class="page-header">
+                Lista comuni per spese per tipologia<small>Comune</small>
             </h1>
         </div>
     </div>
@@ -18,7 +23,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover" id="porchio">
                             <?php
-                                include "php/getlistacomuniperspesa.php";
+                                include "php/getlistacomuniperspesapertipologia.php";
                             ?>
                         </table>
                     </div>
@@ -39,10 +44,10 @@
         {
             if(document.getElementById('myOutput').innerHTML != "10")
             {
-                $("#porchio").load("php/listacomuniperspesa.php?cod_com=" + 
+                $("#porchio").load("php/getlistacomuniperspesapertipologia.php?cod_com=" + 
                     "<?php echo "" . $_GET["cod_com"]; ?>" + "&&cod_prov=" + 
                     "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
-                document.getElementById('myOutput').innerHTML + "&&off=10");
+                document.getElementById('myOutput').innerHTML + "&&off=30");
                 document.getElementById('myOutput').innerHTML = 
                     parseInt(document.getElementById('myOutput').innerHTML) - 10;
                 document.getElementById('link1').scrollIntoView();
@@ -50,12 +55,13 @@
         });
         $("#nextButton").click(function(event)
         {
-            $("#porchio").load("php/listacomuniperspesa.php?cod_com=" + 
+            $("#porchio").load("php/getlistacomuniperspesapertipologia.php?cod_com=" + 
                 "<?php echo "" . $_GET["cod_com"]; ?>" + "&&cod_prov=" + 
                 "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
-            document.getElementById('myOutput').innerHTML + "&&off=10");
+            document.getElementById('myOutput').innerHTML + "&&off=30");
             document.getElementById('myOutput').innerHTML = 
                 parseInt(document.getElementById('myOutput').innerHTML) + 10;
             document.getElementById('link1').scrollIntoView();
         });
     </script>
+

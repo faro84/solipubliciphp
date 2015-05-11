@@ -341,6 +341,8 @@
                             include("php/nazione.php");
                         if($content == "ccst")
                             include("php/listacompletacomunispesetotali.php");
+                        if($content == "sptc")
+                            include("php/listacompletacomunespesepertipologia.php");
                     }
                     else
                     {
@@ -373,8 +375,7 @@
                     $(document).ready(function () {
                         $('#dataTables-example').dataTable();
                     });
-                    
-                    
+                   
                 </script>
         <?php }
                     if($content == "rip") {
@@ -385,6 +386,9 @@
                     else if ($content == "prov") {
                         $string = "generateProvinciaChart(\"cod_prov=" . $_GET["cod_prov"] . "\")";
                     }
+                    else if($content == "naz"){
+                        echo "<script type=\"text/javascript\" src=\"assets/js/sequence.js\"></script>";
+                    }
         }
         ?>
     
@@ -392,7 +396,6 @@
     <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
     <script src="assets/js/autocompletesearch.js"></script>
-     <script type="text/javascript" src="assets/js/sequence.js"></script>
 </body>
 
 </html>
