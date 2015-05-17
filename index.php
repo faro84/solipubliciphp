@@ -345,6 +345,8 @@
                             include("php/listacompletacomunespesepertipologia.php");
                         if($content == "ccstpc")
                             include("php/listacompletacomunispeseperpersona.php");
+                        if($content == "ec")
+                            include("php/listacompletaspesepertipologiacomune.php");
                     }
                     else
                     {

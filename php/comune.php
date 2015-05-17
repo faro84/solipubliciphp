@@ -134,7 +134,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Enti Panel
+                    <a href=<?php echo "index.php?content=ec&&cod_com=" . $_GET["cod_com"] . "&&cod_prov=" . $_GET["cod_prov"] . ">Enti panel</a>";?>
                 </div>
                 <div class="panel-body">
                     <div class="list-group-mine">
