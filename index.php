@@ -343,6 +343,8 @@
                             include("php/listacompletacomunispesetotali.php");
                         if($content == "sptc")
                             include("php/listacompletacomunespesepertipologia.php");
+                        if($content == "ccstpc")
+                            include("php/listacompletacomunispeseperpersona.php");
                     }
                     else
                     {
@@ -389,6 +391,10 @@
                     else if($content == "naz"){
                         echo "<script type=\"text/javascript\" src=\"assets/js/sequence.js\"></script>";
                     }
+        }
+        else{
+            echo "<script src=\"assets/js/simplechart.js\"></script>";
+            $string = "generateNazioneChart()";
         }
         ?>
     

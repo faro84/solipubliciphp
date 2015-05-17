@@ -109,18 +109,18 @@
         </div>
         <!--/.row-->
 			
-	<div class="row">
+	<div class="row" id="row1">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Line Chart
+                        Advanced Tables
                     </div>
                     <div class="panel-body">
-                        <div id="morris-line-chart"></div>
+                        <svg id="scatter"></svg>
                     </div>
-                </div>  
-            </div>		
-	</div> 
+                </div>
+            </div>
+        </div>
 				
         <div class="row">
             <div class="col-md-9 col-sm-12 col-xs-12">
@@ -179,11 +179,11 @@
             <div class="col-md-6 col-sm-12 col-xs-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Tasks Panel
+                        <a href="index.php?content=ccstpc">Lista comuni</a>
                     </div>
                     <div class="panel-body">
                         <div class="list-group">
-                            <?php include("php/gettoptenspesetotalicomuni.php") ?>
+                            <?php include("php/data/getclassificacomunitotalepercittadino.php") ?>
                         </div>
                         <div>
                             <a href="#" class="text-left">Previous Tasks <i class="fa fa-arrow-circle-left"></i></a>

@@ -16,14 +16,14 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $sql = "SELECT POSIZIONETOTALESPESE FROM soldipubblici_notebook.comuni_spesatotale " . 
+    $sql = "SELECT POSIZIONETOTALESPESEPERPERSONA FROM soldipubblici_notebook.comuni_spesatotale " . 
                 "where cod_comune = '" . $_GET["cod_com"] . "' && cod_provincia= '" . $_GET["cod_prov"] . "';";
     //echo $sql;
     $result = $conn->query($sql);
     if ($result->num_rows > 0)
     {
         while($row = $result->fetch_assoc()) {
-            echo $row["POSIZIONETOTALESPESE"];
+            echo $row["POSIZIONETOTALESPESEPERPERSONA"];
         }
     }
     $conn->close();

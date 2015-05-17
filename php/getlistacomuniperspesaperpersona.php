@@ -55,7 +55,7 @@
                 join soldipubblici_notebook.anagrafe_comuni on 
                 comuni_spesatotale.cod_comune = anagrafe_comuni.cod_comune and 
                 comuni_spesatotale.cod_provincia = anagrafe_comuni.cod_provincia
-                order by comuni_spesatotale.totale desc LIMIT " . $limit . " OFFSET " . $start . ";";
+                order by comuni_spesatotale.totalepercittadino desc LIMIT " . $limit . " OFFSET " . $start . ";";
         echo $sql;
         $result = $conn->query($sql);
         $tableElements = array();
@@ -78,7 +78,7 @@
         
         foreach($tableElements as $tableElement)
         {
-            $sql2 = "SELECT ANNO,TOTALE FROM soldipubblici_notebook.comuni_spesatotale_per_anno "
+            $sql2 = "SELECT ANNO,TOTALEPERCITTADINO FROM soldipubblici_notebook.comuni_spesatotale_per_anno "
                     . "where cod_comune = '" . $tableElement->cod_com . "' && "
                     . "cod_provincia= '" . $tableElement->cod_prov . "';";
             echo $sql2;
@@ -88,13 +88,13 @@
                 while($row2 = $result2->fetch_assoc())
                 {
                     if($row2['ANNO'] == "2013"){
-                        $tableElement->anno1 = $row2['TOTALE'];
+                        $tableElement->anno1 = $row2['TOTALEPERCITTADINO'];
                     }
                     else if($row2['ANNO'] == "2014"){
-                        $tableElement->anno2 = $row2['TOTALE'];
+                        $tableElement->anno2 = $row2['TOTALEPERCITTADINO'];
                     }
                     else if($row2['ANNO'] == "2015"){
-                        $tableElement->anno3 = $row2['TOTALE'];
+                        $tableElement->anno3 = $row2['TOTALEPERCITTADINO'];
                     }
                 }
             }
@@ -106,14 +106,13 @@
             echo "<td>1</td>";
             echo "<td><a href=index.php?content=com&&cod_com=" . $tableElement->cod_com . "&&cod_prov=" . $tableElement->cod_prov  . ">" . 
                     $tableElement->descrizione . "</a><span class=\"badge\" style=\"float:right\">" . $tableElement->descrizione . "</span></td>";
-            echo "<td>" . $tableElement->totale . "</td>";
-            echo "<td>" . $tableElement->anno1 . "</td>";
-            echo "<td>" . $tableElement->anno2 . "</td>";
-            echo "<td>" . $tableElement->anno3 . "</td>";
+            echo "<td>" . number_format(floor($tableElement->totalepersona), 0, ",", ".") . "</td>";
+            echo "<td>" . number_format(floor($tableElement->anno1), 0, ",", ".") . "</td>";
+            echo "<td>" . number_format(floor($tableElement->anno2), 0, ",", ".") . "</td>";
+            echo "<td>" . number_format(floor($tableElement->anno3), 0, ",", ".") . "</td>";
             echo "</tr>";
         }
         
         $conn->close();
         echo "</tbody>";
     }
-

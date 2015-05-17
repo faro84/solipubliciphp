@@ -22,10 +22,14 @@
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                echo "<a href=\"#\" class=\"list-group-item\">";
-                echo "<span class=\"badge\">" . $row["TOTALE"] . "</span>";
-                echo "<i class=\"fa fa-fw fa-comment\"></i>" . $row["DESCRIZIONE_ENTE"];
-                echo "</a>";
+                if($row["TOTALE"] != "0")
+                {
+                    echo "<a href=\"#\" class=\"list-group-item\">";
+                    echo "<span class=\"badge\">" . $row["TOTALE"] . "</span>";
+                    echo "<i class=\"fa fa-fw fa-comment\"></i>" . $row["DESCRIZIONE_ENTE"];
+                    echo "</a>";    
+                }
+                
             }
         }
         

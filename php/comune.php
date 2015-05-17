@@ -15,7 +15,7 @@
                 </div>
                 <div class="panel-right pull-right">
                     <h3><?php include "php/getordertotalespese.php" ?></h3>
-                    <strong> Daily Visits</strong>
+                    <strong> Posizione per totale spese</strong>
                 </div>
             </div>
         </div>
@@ -25,8 +25,8 @@
                         <i class="fa fa-shopping-cart fa-5x"></i>
                     </div>                
                     <div class="panel-right pull-right">
-                        <h3>52,160 </h3>
-                        <strong> Sales</strong>
+                        <h3> <?php include("php/data/getorderespeseperpersona.php"); ?> </h3>
+                        <strong> Posizione per spesa per persona</strong>
                     </div>
                 </div>
         </div>
