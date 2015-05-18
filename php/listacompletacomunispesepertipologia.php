@@ -1,13 +1,12 @@
-    
     <div class="row">
         <div class="col-md-12">
             <h1 class="page-header">
-                <?php include "php/header/getheadercomune.php" ?> <small>Responsive tables</small>
+                <?php echo $_GET["cod_tip"]; ?> <small>Responsive tables</small>
             </h1>
         </div>
         <div class="col-md-12">
             <h1 class="page-header">
-                Lista comuni per spese tipologia<small>Comune</small>
+                Lista comuni per spese per singola tipologia<small>Comune</small>
             </h1>
         </div>
     </div>
@@ -23,7 +22,7 @@
                     <div class="table-responsive">
                         <table class="table table-striped table-bordered table-hover" id="porchio">
                             <?php
-                                include "php/getlistacomuniperspesapertipologia.php";
+                                include "php/getlistacomuniperspesaperspecificatipologia.php";
                             ?>
                         </table>
                     </div>
@@ -44,9 +43,8 @@
         {
             if(document.getElementById('myOutput').innerHTML != "10")
             {
-                $("#porchio").load("php/getlistacomuniperspesapertipologia.php?cod_com=" + 
-                    "<?php echo "" . $_GET["cod_com"]; ?>" + "&&cod_prov=" + 
-                    "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
+                $("#porchio").load("php/getlistacomuniperspesaperspecificatipologia.php?cod_tip=" + 
+                    "<?php echo "" . $_GET["cod_tip"]; ?>" + "&&start=" + 
                 document.getElementById('myOutput').innerHTML + "&&off=30");
                 document.getElementById('myOutput').innerHTML = 
                     parseInt(document.getElementById('myOutput').innerHTML) - 10;
@@ -55,13 +53,11 @@
         });
         $("#nextButton").click(function(event)
         {
-            $("#porchio").load("php/getlistacomuniperspesapertipologia.php?cod_com=" + 
-                "<?php echo "" . $_GET["cod_com"]; ?>" + "&&cod_prov=" + 
-                "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
+            $("#porchio").load("php/getlistacomuniperspesaperspecificatipologia.php?cod_tip=" + 
+                "<?php echo "" . $_GET["cod_tip"]; ?>" + "&&start=" + 
             document.getElementById('myOutput').innerHTML + "&&off=30");
             document.getElementById('myOutput').innerHTML = 
                 parseInt(document.getElementById('myOutput').innerHTML) + 10;
             document.getElementById('link1').scrollIntoView();
         });
     </script>
-

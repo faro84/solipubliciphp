@@ -1,16 +1,15 @@
 <?php
 
     $start = 0;
-    $off = 10;
-    if(isset($_GET["start"])){
+    $off = 30;
+    if(isset($_GET["start"]))
+    {
         $start = $_GET["start"];
         $off = $_GET["off"];
-        $cod_com = $_GET["cod_com"];
-        $cod_prov = $_GET["cod_prov"];
     }
-    GetComuniSpeseTabellaComplete($start, $off);
+    ListaComuniPerSpesaPerSingolaTipologiaPerAnno($start, $off);
     
-    function GetComuniSpeseTabellaComplete($start, $end)
+    function ListaComuniPerSpesaPerSingolaTipologiaPerAnno($start, $end)
     {
         echo "<thead>";
         echo "<tr>";
@@ -38,18 +37,27 @@
         
         class TableElement
         {
+            public $comune;
             public $descrizione;
             public $totale;
             public $totalepersona;
+            public $descrizionespesa;
+            public $cod_com;
+            public $cod_prov;
             public $anno1;
             public $anno2;
             public $anno3;
         }
         
         $limit = $end;
-        $sql = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale_per_tipologia " .
-                "where cod_comune = '" . $_GET["cod_com"] . "' && cod_provincia= '" . $_GET["cod_prov"] . 
-                "' ORDER BY TOTALE DESC LIMIT " . $limit . " OFFSET " . $start . ";";
+        $sql = "SELECT descr_comune, totale, totalepercittadino, descrizione,
+                comuni_spesatotale_per_tipologia.cod_comune, comuni_spesatotale_per_tipologia.cod_provincia
+                FROM soldipubblici_notebook.comuni_spesatotale_per_tipologia 
+                join soldipubblici_notebook.anagrafe_comuni on 
+                comuni_spesatotale_per_tipologia.cod_comune = anagrafe_comuni.cod_comune and 
+                comuni_spesatotale_per_tipologia.cod_provincia = anagrafe_comuni.cod_provincia
+                where descrizione = '" . $_GET["cod_tip"] . "'
+                order by comuni_spesatotale_per_tipologia.totale desc LIMIT " . $limit . " OFFSET " . $start . ";";
         //echo $sql;
         $result = $conn->query($sql);
         $tableElements = array();
@@ -58,9 +66,12 @@
             while($row = $result->fetch_assoc())
             {
                 $tableelement = new TableElement();
-                $tableelement->totale = $row["TOTALE"];
-                $tableelement->descrizione = $row['DESCRIZIONE'];
-                $tableelement->totalepersona = $row['TOTALEPERCITTADINO'];
+                $tableelement->totale = $row["totale"];
+                $tableelement->cod_com = $row["cod_comune"];
+                $tableelement->cod_prov = $row["cod_provincia"];
+                $tableelement->descrizione = $row['descr_comune'];
+                $tableelement->totalepersona = $row['totalepercittadino'];
+                $tableelement->descrizionespesa = $row['descrizione'];
                 $tableelement->anno1 = "0";
                 $tableelement->anno2 = "0";
                 $tableelement->anno3 = "0";
@@ -71,9 +82,11 @@
         foreach($tableElements as $tableElement)
         {
             $sql2 = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale_per_anno_per_tipologia "
-                    . "where descrizione = '" . $tableElement->descrizione ."' "
-                    . "and cod_comune = '" . $_GET["cod_com"] . "' && cod_provincia= '" . $_GET["cod_prov"] . "';";
-            //echo $sql2;
+                    . "where cod_comune = '" . $tableElement->cod_com . "' && "
+                    . "cod_provincia= '" . $tableElement->cod_prov . "' and"
+                    . " descrizione = '" . $tableElement->descrizionespesa . "';";
+            
+            //echo $sql2 . PHP_EOL;
             $result2 = $conn->query($sql2);
             if ($result2->num_rows > 0)
             {
@@ -91,19 +104,19 @@
                 }
             }
         }
-        $index = 1;
+        
         foreach($tableElements as $tableElement)
         {
             echo "<tr>";
-            echo "<td>" . $index . "</td>";
-            echo "<td><a href=\"index.php?content=ct&&cod_tip=" . $tableElement->descrizione . "\">" . $tableElement->descrizione . "</a><span class=\"badge\" style=\"float:right\">" . $tableElement->descrizione . "</span></td>";
-            echo "<td>" . $tableElement->totale . "</td>";
-            echo "<td>" . $tableElement->anno1 . "</td>";
-            echo "<td>" . $tableElement->anno2 . "</td>";
-            echo "<td>" . $tableElement->anno3 . "</td>";
+            echo "<td>1</td>";
+            echo "<td>" . $tableElement->descrizione . 
+                    "<span class=\"badge\" style=\"float:right\">" . $tableElement->descrizione . "</span></td>";
+            //number_format(floor($tableElement->totalepersona), 0, ",", ".")
+            echo "<td>" . number_format($tableElement->totale, 0, ",", ".") . "</td>";
+            echo "<td>" . number_format($tableElement->anno1, 0, ",", ".") . "</td>";
+            echo "<td>" . number_format($tableElement->anno2, 0, ",", ".") . "</td>";
+            echo "<td>" . number_format($tableElement->anno3, 0, ",", ".") . "</td>";
             echo "</tr>";
-            
-            $index++;
         }
         
         $conn->close();

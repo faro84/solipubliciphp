@@ -337,6 +337,8 @@
                             include("php/comune.php");
                         if($content == "prov")
                             include("php/provincia.php");
+                        if($content == "reg")
+                            include("php/regione.php");
                         if($content == "naz")
                             include("php/nazione.php");
                         if($content == "ccst")
@@ -347,6 +349,8 @@
                             include("php/listacompletacomunispeseperpersona.php");
                         if($content == "ec")
                             include("php/listacompletaspesepertipologiacomune.php");
+                        if($content == "ct")
+                            include("php/listacompletacomunispesepertipologia.php");
                     }
                     else
                     {
