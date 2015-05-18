@@ -14,7 +14,7 @@
         FROM soldipubblici_notebook.anagrafe_comuni join soldipubblici_notebook.anag_reg_prov 
         on anagrafe_comuni.cod_provincia = anag_reg_prov.cod_provincia where anagrafe_comuni.cod_comune = '" 
         . $_GET["cod_com"] . "' and anagrafe_comuni.cod_provincia='" . $_GET["cod_prov"] . "';";
-    //echo $sql;
+    echo $sql;
     $result = $conn->query($sql);
     if ($result->num_rows > 0)
     {
