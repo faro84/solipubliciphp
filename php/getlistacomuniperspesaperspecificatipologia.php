@@ -4,6 +4,7 @@
     $off = 30;
     if(isset($_GET["start"]))
     {
+        echo "isset";
         $start = $_GET["start"];
         $off = $_GET["off"];
     }
@@ -105,18 +106,22 @@
             }
         }
         
+        $index = $start + 1;
         foreach($tableElements as $tableElement)
         {
             echo "<tr>";
-            echo "<td>1</td>";
-            echo "<td>" . $tableElement->descrizione . 
-                    "<span class=\"badge\" style=\"float:right\">" . $tableElement->descrizione . "</span></td>";
-            //number_format(floor($tableElement->totalepersona), 0, ",", ".")
+            echo "<td>" . $index . "</td>";
+            echo "<td><a href='index.php?content=com&&cod_com=" 
+                . $tableElement->cod_com . "&&cod_prov=" 
+                . $tableElement->cod_prov . "'>" 
+                . $tableElement->descrizione . 
+                "</a><span class=\"badge\" style=\"float:right\">" . $tableElement->descrizione . "</span></td>";
             echo "<td>" . number_format($tableElement->totale, 0, ",", ".") . "</td>";
             echo "<td>" . number_format($tableElement->anno1, 0, ",", ".") . "</td>";
             echo "<td>" . number_format($tableElement->anno2, 0, ",", ".") . "</td>";
             echo "<td>" . number_format($tableElement->anno3, 0, ",", ".") . "</td>";
             echo "</tr>";
+            $index++;
         }
         
         $conn->close();

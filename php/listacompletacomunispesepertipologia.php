@@ -20,7 +20,7 @@
                 </div> 
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" id="porchio">
+                        <table class="table table-striped table-bordered table-hover" id="maintable">
                             <?php
                                 include "php/getlistacomuniperspesaperspecificatipologia.php";
                             ?>
@@ -36,28 +36,37 @@
         </div>
     </div>
             
-    <div id="myOutput" style="display: none;">10</div>
+    <div id="myOutput" style="display: none;">0</div>
  
     <script>
         $("#previousButton").click(function(event)
         {
-            if(document.getElementById('myOutput').innerHTML != "10")
+            if(document.getElementById('myOutput').innerHTML != "0")
             {
-                $("#porchio").load("php/getlistacomuniperspesaperspecificatipologia.php?cod_tip=" + 
-                    "<?php echo "" . $_GET["cod_tip"]; ?>" + "&&start=" + 
-                document.getElementById('myOutput').innerHTML + "&&off=30");
                 document.getElementById('myOutput').innerHTML = 
-                    parseInt(document.getElementById('myOutput').innerHTML) - 10;
+                    parseInt(document.getElementById('myOutput').innerHTML) - 30;
+                var link = "php/getlistacomuniperspesaperspecificatipologia.php?cod_tip=" + 
+                    encodeURIComponent("<?php echo "" . $_GET["cod_tip"]; ?>") + "&&start=" + 
+                    document.getElementById('myOutput').innerHTML + "&&off=30";
+                //console.log(link);
+                //console.log(document.getElementById('maintable').rows.length);
+                $("#maintable").load(link);
                 document.getElementById('link1').scrollIntoView();
             }
         });
         $("#nextButton").click(function(event)
         {
-            $("#porchio").load("php/getlistacomuniperspesaperspecificatipologia.php?cod_tip=" + 
-                "<?php echo "" . $_GET["cod_tip"]; ?>" + "&&start=" + 
-            document.getElementById('myOutput').innerHTML + "&&off=30");
-            document.getElementById('myOutput').innerHTML = 
-                parseInt(document.getElementById('myOutput').innerHTML) + 10;
-            document.getElementById('link1').scrollIntoView();
+            if(document.getElementById('maintable').rows.length != 31)
+            {
+                document.getElementById('myOutput').innerHTML = 
+                    parseInt(document.getElementById('myOutput').innerHTML) + 30;
+                var link = "php/getlistacomuniperspesaperspecificatipologia.php?cod_tip=" + 
+                    encodeURIComponent("<?php echo "" . $_GET["cod_tip"]; ?>") + "&&start=" + 
+                document.getElementById('myOutput').innerHTML + "&&off=30";
+                //console.log(link);
+                //console.log(document.getElementById('myOutput').innerHTML);
+                $("#maintable").load(link);
+                document.getElementById('link1').scrollIntoView();
+            }
         });
     </script>
