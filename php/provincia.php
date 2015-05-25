@@ -67,16 +67,19 @@
                 </div> 
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" id="porchio">
+                        <table class="table table-striped table-bordered table-hover" id="tablespeseprovincia">
                             <?php
                                 include "php/completetableprovincia.php";
                             ?>
                         </table>
                     </div>
                     <div class="buttonsPreviousNext">
-                        <a href="#" id="previousButton" class="text-left"> <i class="fa fa-arrow-circle-left"></i>Previous Tasks</a>
-                            <a href="#" id="nextButton" class="text-right">Next Tasks <i class="fa fa-arrow-circle-right"></i></a>
-                            <a href="#1" id="link1"></a>
+                        <a href="#" id="previousButton" class="text-left"> 
+                            <i class="fa fa-arrow-circle-left"></i>Previous Tasks
+                        </a>
+                        <a href="#" id="nextButton" class="text-right">
+                            Next Tasks <i class="fa fa-arrow-circle-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -122,23 +125,25 @@
     <script>
         $("#previousButton").click(function(event)
         {
+            event.preventDefault();
             if(document.getElementById('myOutput').innerHTML != "10")
             {
-                $("#porchio").load("php/completetableprovincia.php?cod_prov=" + 
+                $("#tablespeseprovincia").load("php/completetableprovincia.php?cod_prov=" + 
                     "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
                     document.getElementById('myOutput').innerHTML + "&&off=10");
                 document.getElementById('myOutput').innerHTML = 
                     parseInt(document.getElementById('myOutput').innerHTML) - 10;
-                document.getElementById('link1').scrollIntoView();
+                $(document).scrollTop( $("#tablespeseprovincia").offset().top );
             }
         });
         $("#nextButton").click(function(event)
         {
-            $("#porchio").load("php/completetableprovincia.php?cod_prov=" + 
+            event.preventDefault();
+            $("#tablespeseprovincia").load("php/completetableprovincia.php?cod_prov=" + 
                 "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
                 document.getElementById('myOutput').innerHTML + "&&off=10");
             document.getElementById('myOutput').innerHTML = 
                 parseInt(document.getElementById('myOutput').innerHTML) + 10;
-            document.getElementById('link1').scrollIntoView();
+            $(document).scrollTop( $("#tablespeseprovincia").offset().top );
         });
     </script>

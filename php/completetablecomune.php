@@ -71,9 +71,9 @@
         foreach($tableElements as $tableElement)
         {
             $sql2 = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale_per_anno_per_tipologia "
-                    . "where descrizione = '" . $tableElement->descrizione ."' "
+                    . "where descrizione = '". $tableElement->descrizione . "' "
                     . "and cod_comune = '" . $_GET["cod_com"] . "' && cod_provincia= '" . $_GET["cod_prov"] . "';";
-            //echo $sql2;
+            echo $sql2;
             $result2 = $conn->query($sql2);
             if ($result2->num_rows > 0)
             {
@@ -96,11 +96,14 @@
         {
             echo "<tr>";
             echo "<td>" . $index . "</td>";
-            echo "<td><a href=\"index.php?content=ct&&cod_tip=" . $tableElement->descrizione . "\">" . $tableElement->descrizione . "</a><span class=\"badge\" style=\"float:right\">" . $tableElement->descrizione . "</span></td>";
-            echo "<td>" . $tableElement->totale . "</td>";
-            echo "<td>" . $tableElement->anno1 . "</td>";
-            echo "<td>" . $tableElement->anno2 . "</td>";
-            echo "<td>" . $tableElement->anno3 . "</td>";
+            echo "<td><a href=\"index.php?content=ct&&cod_tip=" . $tableElement->descrizione . "\">" 
+                    . $tableElement->descrizione . "</td>";
+            echo "<td>" . number_format($tableElement->totale, 0, ",", ".") . "</a><span class=\"badge\" style=\"float:right\">" 
+                    . number_format(floor($tableElement->totalepersona), 0, ",", ".") . "</span></td>";
+            //number_format(floor($tableElement->totalepersona), 0, ",", ".")
+            echo "<td>" . number_format(floor($tableElement->anno1), 0, ",", ".") . "</td>";
+            echo "<td>" . number_format(floor($tableElement->anno2), 0, ",", ".") . "</td>";
+            echo "<td>" . number_format(floor($tableElement->anno3), 0, ",", ".") . "</td>";
             echo "</tr>";
             
             $index++;

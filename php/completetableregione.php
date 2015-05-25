@@ -36,9 +36,8 @@
         
         class TableElement
         {
-            public $cod_com;
-            public $cod_prov;
             public $descrizione;
+            public $coddescrizione;
             public $totale;
             public $totalepersona;
             public $anno1;
@@ -47,10 +46,10 @@
         }
         
         $limit = $end;
-        $sql = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale_per_anno_per_tipologia
-            join soldipubblici_notebook.anag_reg_prov 
-            on comuni_spesatotale_per_anno_per_tipologia.cod_provincia = anag_reg_prov.cod_provincia
-            where anag_reg_prov.cod_regione = '" . $_GET["cod_reg"] . "' LIMIT " . $limit . " OFFSET " . $start . ";";
+        $sql = "SELECT * FROM soldipubblici_notebook.regioni_spesatotale_per_tipologia" 
+                . " where cod_regione = '" . $_GET["cod_reg"] 
+                . "' order by TOTALE desc "
+                . " LIMIT " . $limit . " OFFSET " . $start . ";";
         echo $sql;
         $result = $conn->query($sql);
         $tableElements = array();
@@ -61,9 +60,8 @@
                 $tableelement = new TableElement();
                 $tableelement->totale = $row["TOTALE"];
                 $tableelement->descrizione = $row['DESCRIZIONE'];
+                $tableelement->coddescrizione = $row['CODDESCRIZIONE'];
                 $tableelement->totalepersona = $row['TOTALEPERCITTADINO'];
-                $tableelement->cod_com = $row['COD_COMUNE'];
-                $tableelement->cod_prov = $row['COD_PROVINCIA'];
                 $tableelement->anno1 = "0";
                 $tableelement->anno2 = "0";
                 $tableelement->anno3 = "0";
@@ -73,9 +71,9 @@
         
         foreach($tableElements as $tableElement)
         {
-            $sql2 = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale_per_anno_per_tipologia "
-                    . "where descrizione = '" . $tableElement->descrizione ."' "
-                    . "and cod_comune = '" . $tableElement->cod_com . "' && cod_provincia= '" . $tableElement->cod_prov . "';";
+            $sql2 = "SELECT ANNO, TOTALE FROM soldipubblici_notebook.regioni_spesatotale_per_anno_per_tipologia "
+                    . "where coddescrizione = '" . $tableElement->coddescrizione ."'"
+                    . " and cod_regione = '" . $_GET["cod_reg"] . "';";
             echo $sql2;
             $result2 = $conn->query($sql2);
             if ($result2->num_rows > 0)

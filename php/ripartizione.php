@@ -67,16 +67,19 @@
                 </div> 
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" id="porchio">
+                        <table class="table table-striped table-bordered table-hover" id="tablespeseripartizione">
                             <?php
                                 include "php/completetableripartizione.php";
                             ?>
                         </table>
                     </div>
                     <div class="buttonsPreviousNext">
-                        <a href="#" id="previousButton" class="text-left"> <i class="fa fa-arrow-circle-left"></i>Previous Tasks</a>
-                            <a href="#" id="nextButton" class="text-right">Next Tasks <i class="fa fa-arrow-circle-right"></i></a>
-                            <a href="#1" id="link1"></a>
+                        <a href="#" id="previousButton" class="text-left">
+                            <i class="fa fa-arrow-circle-left"></i>Previous Tasks
+                        </a>
+                        <a href="#" id="nextButton" class="text-right">
+                            Next Tasks <i class="fa fa-arrow-circle-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -102,24 +105,26 @@
     <script>
         $("#previousButton").click(function(event)
         {
+            event.preventDefault();
             if(document.getElementById('myOutput').innerHTML != "10")
             {
-                $("#porchio").load("php/completetableripartizione.php?cod_rip=" + 
+                $("#tablespeseripartizione").load("php/completetableripartizione.php?cod_rip=" + 
                     "<?php echo "" . $_GET["cod_rip"] ?>" + "&&start=" + 
                     document.getElementById('myOutput').innerHTML + "&&off=10");
                 document.getElementById('myOutput').innerHTML = 
                     parseInt(document.getElementById('myOutput').innerHTML) - 10;
-                document.getElementById('link1').scrollIntoView();
+                $(document).scrollTop( $("#tablespeseripartizione").offset().top );
             }
         });
         $("#nextButton").click(function(event)
         {
-            $("#porchio").load("php/completetableripartizione.php?cod_rip=" + 
+            event.preventDefault();
+            $("#tablespeseripartizione").load("php/completetableripartizione.php?cod_rip=" + 
                 "<?php echo "" . $_GET["cod_rip"] ?>" + "&&start=" + 
                 document.getElementById('myOutput').innerHTML + "&&off=10");
             document.getElementById('myOutput').innerHTML = 
                 parseInt(document.getElementById('myOutput').innerHTML) + 10;
-            document.getElementById('link1').scrollIntoView();
+            $(document).scrollTop( $("#tablespeseripartizione").offset().top );
         });
     </script>
 
