@@ -50,7 +50,7 @@
                 . " where cod_regione = '" . $_GET["cod_reg"] 
                 . "' order by TOTALE desc "
                 . " LIMIT " . $limit . " OFFSET " . $start . ";";
-        echo $sql;
+//        echo $sql;
         $result = $conn->query($sql);
         $tableElements = array();
         if ($result->num_rows > 0)
@@ -74,7 +74,7 @@
             $sql2 = "SELECT ANNO, TOTALE FROM soldipubblici_notebook.regioni_spesatotale_per_anno_per_tipologia "
                     . "where coddescrizione = '" . $tableElement->coddescrizione ."'"
                     . " and cod_regione = '" . $_GET["cod_reg"] . "';";
-            echo $sql2;
+//            echo $sql2;
             $result2 = $conn->query($sql2);
             if ($result2->num_rows > 0)
             {
@@ -92,16 +92,20 @@
                 }
             }
         }
-        $index = 1;
+        
+        $index = $start + 1;
         foreach($tableElements as $tableElement)
         {
             echo "<tr>";
             echo "<td>" . $index . "</td>";
-            echo "<td><a href=\"index.php?content=ct&&cod_tip=" . $tableElement->descrizione . "\">" . $tableElement->descrizione . "</a><span class=\"badge\" style=\"float:right\">" . $tableElement->descrizione . "</span></td>";
-            echo "<td>" . $tableElement->totale . "</td>";
-            echo "<td>" . $tableElement->anno1 . "</td>";
-            echo "<td>" . $tableElement->anno2 . "</td>";
-            echo "<td>" . $tableElement->anno3 . "</td>";
+            echo "<td><a href=\"index.php?content=ct&&cod_tip=" 
+                    . $tableElement->coddescrizione . "\">" 
+                    . $tableElement->descrizione . "</a><span class=\"badge\" style=\"float:right\">" 
+                    . number_format(floor($tableElement->totalepersona), 0, ",", ".") . "</span></td>";
+            echo "<td>" . number_format(floor($tableElement->totale), 0, ",", ".") . "</td>";
+            echo "<td>" . number_format(floor($tableElement->anno1), 0, ",", ".") . "</td>";
+            echo "<td>" . number_format(floor($tableElement->anno2), 0, ",", ".") . "</td>";
+            echo "<td>" . number_format(floor($tableElement->anno3), 0, ",", ".") . "</td>";
             echo "</tr>";
             
             $index++;

@@ -57,7 +57,7 @@
                 join soldipubblici_notebook.anagrafe_comuni on 
                 comuni_spesatotale_per_tipologia.cod_comune = anagrafe_comuni.cod_comune and 
                 comuni_spesatotale_per_tipologia.cod_provincia = anagrafe_comuni.cod_provincia
-                where descrizione = '" . $_GET["cod_tip"] . "'
+                where coddescrizione = '" . $_GET["cod_tip"] . "'
                 order by comuni_spesatotale_per_tipologia.totale desc LIMIT " . $limit . " OFFSET " . $start . ";";
         //echo $sql;
         $result = $conn->query($sql);
@@ -82,10 +82,10 @@
         
         foreach($tableElements as $tableElement)
         {
-            $sql2 = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale_per_anno_per_tipologia "
+            $sql2 = "SELECT TOTALE,ANNO FROM soldipubblici_notebook.comuni_spesatotale_per_anno_per_tipologia "
                     . "where cod_comune = '" . $tableElement->cod_com . "' && "
                     . "cod_provincia= '" . $tableElement->cod_prov . "' and"
-                    . " descrizione = '" . $tableElement->descrizionespesa . "';";
+                    . " coddescrizione = '" . $_GET["cod_tip"] . "';";
             
             //echo $sql2 . PHP_EOL;
             $result2 = $conn->query($sql2);
@@ -114,8 +114,9 @@
             echo "<td><a href='index.php?content=com&&cod_com=" 
                 . $tableElement->cod_com . "&&cod_prov=" 
                 . $tableElement->cod_prov . "'>" 
-                . $tableElement->descrizione . 
-                "</a><span class=\"badge\" style=\"float:right\">" . $tableElement->descrizione . "</span></td>";
+                . $tableElement->descrizione
+                . "</a><span class=\"badge\" style=\"float:right\">"
+                . number_format($tableElement->totalepersona, 0, ",", ".") . "</span></td>";
             echo "<td>" . number_format($tableElement->totale, 0, ",", ".") . "</td>";
             echo "<td>" . number_format($tableElement->anno1, 0, ",", ".") . "</td>";
             echo "<td>" . number_format($tableElement->anno2, 0, ",", ".") . "</td>";

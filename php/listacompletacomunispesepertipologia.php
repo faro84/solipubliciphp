@@ -56,7 +56,7 @@
         });
         $("#nextButton").click(function(event)
         {
-            if(document.getElementById('maintable').rows.length != 31)
+            if(document.getElementById('maintable').rows.length == 31)
             {
                 document.getElementById('myOutput').innerHTML = 
                     parseInt(document.getElementById('myOutput').innerHTML) + 30;
