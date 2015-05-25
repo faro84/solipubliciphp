@@ -48,7 +48,7 @@
         
         $limit = $end;
         
-        if(isset($_GET["cod_reg"]) && isset($_GET["cod_prov"]))
+        if(isset($_GET["cod_prov"]))
         {
             $sql = "SELECT descr_comune, totale, totalepercittadino, "
                     . " comuni_spesatotale.cod_comune, comuni_spesatotale.cod_provincia"
@@ -56,7 +56,6 @@
                     . " JOIN soldipubblici_notebook.anagrafe_comuni ON "
                     . " comuni_spesatotale.cod_comune = anagrafe_comuni.cod_comune AND "
                     . " comuni_spesatotale.cod_provincia = anagrafe_comuni.cod_provincia"
-                    . " WHERE comuni_spesatotale.cod_regione = '" . $_GET["cod_reg"] . "'"
                     . " AND comuni_spesatotale.cod_provincia = '" . $_GET["cod_prov"] . "'"
                     . " ORDER BY comuni_spesatotale.totalepercittadino DESC "
                     . " LIMIT " . $limit . " OFFSET " . $start . ";";
@@ -134,8 +133,10 @@
         {
             echo "<tr>";
             echo "<td>" . $index . "</td>";
-            echo "<td><a href=index.php?content=com&&cod_com=" . $tableElement->cod_com . "&&cod_prov=" . $tableElement->cod_prov  . ">" . 
-                    $tableElement->descrizione . "</a><span class=\"badge\" style=\"float:right\">" . $tableElement->descrizione . "</span></td>";
+            echo "<td><a href=index.php?content=com&&cod_com=" 
+                . $tableElement->cod_com . "&&cod_prov=" . $tableElement->cod_prov  
+                . ">" . $tableElement->descrizione . "</a><span class=\"badge\" style=\"float:right\">" 
+                . number_format(floor($tableElement->totalepersona), 0, ",", ".") . "</span></td>";
             echo "<td>" . number_format(floor($tableElement->totalepersona), 0, ",", ".") . "</td>";
             echo "<td>" . number_format(floor($tableElement->anno1), 0, ",", ".") . "</td>";
             echo "<td>" . number_format(floor($tableElement->anno2), 0, ",", ".") . "</td>";

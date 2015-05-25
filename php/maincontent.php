@@ -167,8 +167,11 @@
                     </div>
                     <div class="panel-body">
                         <div class="list-group">
-                            <?php include("php/gettoptenspesetotalicomuni.php") ?>
+                            <table class="table table-striped table-bordered table-hover" id="tablespeseregione">
+                                <?php include("php/gettoptenspesetotalicomuni.php") ?>
+                            </table>
                         </div>
+                        
                         <div>
                             <a href="#" class="text-left">Previous Tasks <i class="fa fa-arrow-circle-left"></i></a>
                             <a href="#" class="text-right">Next Tasks <i class="fa fa-arrow-circle-right"></i></a>
@@ -183,7 +186,9 @@
                     </div>
                     <div class="panel-body">
                         <div class="list-group">
-                            <?php include("php/data/getclassificacomunitotalepercittadino.php") ?>
+                            <table class="table table-striped table-bordered table-hover" id="tablespeseregione">
+                                <?php include("php/data/getclassificacomunitotalepercittadino.php") ?>
+                            </table>
                         </div>
                         <div>
                             <a href="#" class="text-left">Previous Tasks <i class="fa fa-arrow-circle-left"></i></a>

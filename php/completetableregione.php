@@ -6,9 +6,9 @@
         $start = $_GET["start"];
         $off = $_GET["off"];
     }
-    GetComuniSpeseTabellaComplete($start, $off);
+    GetRegioniSpeseTabellaComplete($start, $off);
     
-    function GetComuniSpeseTabellaComplete($start, $end)
+    function GetRegioniSpeseTabellaComplete($start, $end)
     {
         echo "<thead>";
         echo "<tr>";
