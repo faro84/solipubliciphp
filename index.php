@@ -306,9 +306,7 @@
                         <a href="form.html"><i class="fa fa-edit"></i> Forms </a>
                     </li>
 
-                    <li>
-                        <?php include("php/sidemenu.php"); ?>
-                    </li>
+
                     <li>
                         <a href="empty.html"><i class="fa fa-fw fa-file"></i> Empty Page</a>
                     </li>

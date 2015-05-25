@@ -1,7 +1,7 @@
     
     <div class="row">
         <div class="col-md-12">
-            <h1 class="page-header">
+            <h1 class="page-header" id="tablecomunispeseperpersonarow">
                 Lista comuni per spese per persona<small>Comuni</small>
             </h1>
         </div>
@@ -12,50 +12,94 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Responsive Table Example
+                    Lista comuni per spese per persona
                 </div> 
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" id="porchio">
-                            <?php
-                                include "php/getlistacomuniperspesaperpersona.php";
-                            ?>
+                        <table class="table table-striped table-bordered table-hover" id="tablecomunispeseperpersona">
+                            <?php include "php/getlistacomuniperspesaperpersona.php"; ?>
                         </table>
                     </div>
                     <div class="buttonsPreviousNext">
-                        <a href="#" id="previousButton" class="text-left"> <i class="fa fa-arrow-circle-left"></i>Previous Tasks</a>
-                            <a href="#" id="nextButton" class="text-right">Next Tasks <i class="fa fa-arrow-circle-right"></i></a>
-                            <a href="#1" id="link1"></a>
+                        <a href="" id="previousButton" class="text-left">
+                            <i class="fa fa-arrow-circle-left"></i>Previous Tasks
+                        </a>
+                        <a href="" id="nextButton" class="text-right">
+                            Next Tasks <i class="fa fa-arrow-circle-right"></i>
+                        </a>    
                     </div>
                 </div>
             </div>
         </div>
     </div>
             
-    <div id="myOutput" style="display: none;">10</div>
+    <div id="tableComuniSpesePerPersonaIndex" style="display: none;">0</div>
  
     <script>
         $("#previousButton").click(function(event)
         {
-            if(document.getElementById('myOutput').innerHTML != "10")
+            event.preventDefault();
+            if(document.getElementById('tableComuniSpesePerPersonaIndex').innerHTML != "0")
             {
-                $("#porchio").load("php/listacomuniperspesa.php?cod_com=" + 
-                    "<?php echo "" . $_GET["cod_com"]; ?>" + "&&cod_prov=" + 
-                    "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
-                document.getElementById('myOutput').innerHTML + "&&off=10");
-                document.getElementById('myOutput').innerHTML = 
-                    parseInt(document.getElementById('myOutput').innerHTML) - 10;
-                document.getElementById('link1').scrollIntoView();
+                document.getElementById('tableComuniSpesePerPersonaIndex').innerHTML = 
+                    parseInt(document.getElementById('tableComuniSpesePerPersonaIndex').innerHTML) - 30;
+                
+                <?php 
+                
+                if(isset($_GET["cod_reg"]) && isset($_GET["cod_prov"]))
+                {
+                    $partialLink = "\"cod_prov=" . $_GET["cod_prov"] + "&&cod_reg=" . $_GET["cod_reg"] . "&&\"";
+                }
+                elseif (isset($_GET["cod_reg"]))
+                {
+                    $partialLink = "\"cod_reg=" . $_GET["cod_reg"] . "&&\"";
+                }
+                else
+                {
+                    $partialLink = "\"\"";
+                }
+                
+                ?>
+                
+                var link = "php/getlistacomuniperspesaperpersona.php?" + <?php echo $partialLink; ?> + "start=" 
+                        + document.getElementById('tableComuniSpesePerPersonaIndex').innerHTML + "&&off=30";
+                
+                $("#tablecomunispeseperpersona").load(link);
+                
+                $(document).scrollTop( $("#tablecomunispeseperpersonarow").offset().top );
             }
         });
         $("#nextButton").click(function(event)
         {
-            $("#porchio").load("php/listacomuniperspesa.php?cod_com=" + 
-                "<?php echo "" . $_GET["cod_com"]; ?>" + "&&cod_prov=" + 
-                "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
-            document.getElementById('myOutput').innerHTML + "&&off=10");
-            document.getElementById('myOutput').innerHTML = 
-                parseInt(document.getElementById('myOutput').innerHTML) + 10;
-            document.getElementById('link1').scrollIntoView();
+            event.preventDefault();
+            if(document.getElementById('tablecomunispeseperpersona').rows.length == 31)
+            {
+                document.getElementById('tableComuniSpesePerPersonaIndex').innerHTML = 
+                    parseInt(document.getElementById('tableComuniSpesePerPersonaIndex').innerHTML) + 30;
+            
+                <?php 
+                
+                if(isset($_GET["cod_reg"]) && isset($_GET["cod_prov"]))
+                {
+                    $partialLink = "\"cod_prov=" . $_GET["cod_prov"] + "&&cod_reg=" . $_GET["cod_reg"] . "&&\"";
+                }
+                elseif (isset($_GET["cod_reg"]))
+                {
+                    $partialLink = "\"cod_reg=" . $_GET["cod_reg"] . "&&\"";
+                }
+                else
+                {
+                    $partialLink = "\"\"";
+                }
+                
+                ?>
+                
+                var link = "php/getlistacomuniperspesaperpersona.php?" + <?php echo $partialLink; ?> + "start=" 
+                        + document.getElementById('tableComuniSpesePerPersonaIndex').innerHTML + "&&off=30";
+                
+                $("#tablecomunispeseperpersona").load(link);
+                
+                $(document).scrollTop( $("#tablecomunispeseperpersonarow").offset().top );
+            }
         });
     </script>

@@ -83,7 +83,7 @@
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a href="index.php?content=ccst">Lista comuni</a>
+                <a href="index.php?content=ccst&&cod_reg=<?php echo "" . $_GET["cod_reg"]; ?>">Lista comuni</a>
             </div>
             <div class="panel-body">
                 <table class="table table-striped table-bordered table-hover" id="tablecomunispesetotali">
@@ -103,7 +103,7 @@
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <a href="index.php?content=ccstpc">Lista comuni</a>
+                <a href="index.php?content=ccstpc&&cod_reg=<?php echo "" . $_GET["cod_reg"]; ?>">Lista comuni</a>
             </div>
             <div class="panel-body">
                 <div class="list-group">

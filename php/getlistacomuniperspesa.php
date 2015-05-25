@@ -1,12 +1,10 @@
 <?php
 
     $start = 0;
-    $off = 10;
+    $off = 30;
     if(isset($_GET["start"])){
         $start = $_GET["start"];
         $off = $_GET["off"];
-        $cod_com = $_GET["cod_com"];
-        $cod_prov = $_GET["cod_prov"];
     }
     ListaComuniPerSpesa($start, $off);
     
@@ -49,14 +47,45 @@
         }
         
         $limit = $end;
-        $sql = "SELECT descr_comune, totale, totalepercittadino, 
-                comuni_spesatotale.cod_comune, comuni_spesatotale.cod_provincia
-                FROM soldipubblici_notebook.comuni_spesatotale 
-                join soldipubblici_notebook.anagrafe_comuni on 
-                comuni_spesatotale.cod_comune = anagrafe_comuni.cod_comune and 
-                comuni_spesatotale.cod_provincia = anagrafe_comuni.cod_provincia
-                order by comuni_spesatotale.totale desc LIMIT " . $limit . " OFFSET " . $start . ";";
-        echo $sql;
+        
+        if(isset($_GET["cod_reg"]) && isset($_GET["cod_prov"]))
+        {
+            $sql = "SELECT descr_comune, totale, totalepercittadino, "
+                . " comuni_spesatotale.cod_comune, comuni_spesatotale.cod_provincia"
+                . " FROM soldipubblici_notebook.comuni_spesatotale "
+                . " JOIN soldipubblici_notebook.anagrafe_comuni ON "
+                . " comuni_spesatotale.cod_comune = anagrafe_comuni.cod_comune AND "
+                . " comuni_spesatotale.cod_provincia = anagrafe_comuni.cod_provincia"
+                . " WHERE comuni_spesatotale.cod_regione = '" . $_GET["cod_reg"] . "'"
+                . " and comuni_spesatotale.cod_provincia = '" . $_GET["cod_prov"] . "'"
+                . " ORDER BY comuni_spesatotale.totale DESC " 
+                . " LIMIT " . $limit . " OFFSET " . $start . ";";
+        }
+        elseif (isset($_GET["cod_reg"]))
+        {
+            $sql = "SELECT descr_comune, totale, totalepercittadino, "
+                . " comuni_spesatotale.cod_comune, comuni_spesatotale.cod_provincia"
+                . " FROM soldipubblici_notebook.comuni_spesatotale "
+                . " JOIN soldipubblici_notebook.anagrafe_comuni ON "
+                . " comuni_spesatotale.cod_comune = anagrafe_comuni.cod_comune AND "
+                . " comuni_spesatotale.cod_provincia = anagrafe_comuni.cod_provincia"
+                . " WHERE comuni_spesatotale.cod_regione = '" . $_GET["cod_reg"] . "'"
+                . " ORDER BY comuni_spesatotale.totale DESC " 
+                . " LIMIT " . $limit . " OFFSET " . $start . ";";
+        }
+        else
+        {
+            $sql = "SELECT descr_comune, totale, totalepercittadino, "
+                . " comuni_spesatotale.cod_comune, comuni_spesatotale.cod_provincia"
+                . " FROM soldipubblici_notebook.comuni_spesatotale "
+                . " JOIN soldipubblici_notebook.anagrafe_comuni ON "
+                . " comuni_spesatotale.cod_comune = anagrafe_comuni.cod_comune AND "
+                . " comuni_spesatotale.cod_provincia = anagrafe_comuni.cod_provincia"
+                . " ORDER BY comuni_spesatotale.totale DESC " 
+                . " LIMIT " . $limit . " OFFSET " . $start . ";";
+        }
+    
+//        echo $sql;
         $result = $conn->query($sql);
         $tableElements = array();
         if ($result->num_rows > 0)
@@ -79,9 +108,9 @@
         foreach($tableElements as $tableElement)
         {
             $sql2 = "SELECT ANNO,TOTALE FROM soldipubblici_notebook.comuni_spesatotale_per_anno "
-                    . "where cod_comune = '" . $tableElement->cod_com . "' && "
+                    . "WHERE cod_comune = '" . $tableElement->cod_com . "' AND "
                     . "cod_provincia= '" . $tableElement->cod_prov . "';";
-            echo $sql2;
+//            echo $sql2;
             $result2 = $conn->query($sql2);
             if ($result2->num_rows > 0)
             {
@@ -100,17 +129,21 @@
             }
         }
         
+        $index = $start + 1;
         foreach($tableElements as $tableElement)
         {
             echo "<tr>";
-            echo "<td>1</td>";
-            echo "<td><a href=index.php?content=com&&cod_com=" . $tableElement->cod_com . "&&cod_prov=" . $tableElement->cod_prov  . ">" . 
-                    $tableElement->descrizione . "</a><span class=\"badge\" style=\"float:right\">" . $tableElement->descrizione . "</span></td>";
-            echo "<td>" . $tableElement->totale . "</td>";
-            echo "<td>" . $tableElement->anno1 . "</td>";
-            echo "<td>" . $tableElement->anno2 . "</td>";
-            echo "<td>" . $tableElement->anno3 . "</td>";
+            echo "<td>" . $index . "</td>";
+            echo "<td><a href=index.php?content=com&&cod_com=" . $tableElement->cod_com . "&&cod_prov=" 
+                    . $tableElement->cod_prov  . ">" 
+                    . $tableElement->descrizione . "</a><span class=\"badge\" style=\"float:right\">" 
+                    . $tableElement->descrizione . "</span></td>";
+            echo "<td>" . number_format(floor($tableElement->totale), 0, ",", ".") . "</td>";
+            echo "<td>" . number_format(floor($tableElement->anno1), 0, ",", ".") . "</td>";
+            echo "<td>" . number_format(floor($tableElement->anno2), 0, ",", ".") . "</td>";
+            echo "<td>" . number_format(floor($tableElement->anno3), 0, ",", ".") . "</td>";
             echo "</tr>";
+            $index++;
         }
         
         $conn->close();
