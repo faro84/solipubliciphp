@@ -54,6 +54,10 @@
                 {
                     $partialLink = "\"cod_reg=" . $_GET["cod_reg"] . "&&\"";
                 }
+                elseif (isset($_GET["cod_rip"]))
+                {
+                    $partialLink = "\"cod_rip=" . urlencode($_GET["cod_rip"]) . "&&\"";
+                }
                 else
                 {
                     $partialLink = "\"\"";
@@ -86,6 +90,10 @@
                 elseif (isset($_GET["cod_reg"]))
                 {
                     $partialLink = "\"cod_reg=" . $_GET["cod_reg"] . "&&\"";
+                }
+                elseif (isset($_GET["cod_rip"]))
+                {
+                    $partialLink = "\"cod_rip=" . urlencode($_GET["cod_rip"]) . "&&\"";
                 }
                 else
                 {

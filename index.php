@@ -330,7 +330,7 @@
                         if($content == "table")
                             include("php/tablephp.php");
                         if($content == "rip")
-                            include("php/ripartizione_geografica.php");
+                            include("php/ripartizione.php");
                         if($content == "com")
                             include("php/comune.php");
                         if($content == "prov")

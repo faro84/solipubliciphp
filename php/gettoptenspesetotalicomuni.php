@@ -29,14 +29,14 @@
     echo "</thead>";
     echo "<tbody>";
     
-    if(isset($_GET["cod_prov"]))
+    if(isset($_GET["cod_rip"]))
     {
         $sql = "SELECT descr_comune, totale,anagrafe_comuni.cod_comune,anagrafe_comuni.cod_provincia "
             . "FROM soldipubblici_notebook.comuni_spesatotale "
             . "join soldipubblici_notebook.anagrafe_comuni on "
             . "comuni_spesatotale.cod_comune = anagrafe_comuni.cod_comune and "
             . "comuni_spesatotale.cod_provincia = anagrafe_comuni.cod_provincia "
-            . "and comuni_spesatotale.cod_provincia = '" . $_GET["cod_prov"] . "'"
+            . "and comuni_spesatotale.cod_ripartizione = '" . $_GET["cod_rip"] . "'"
             . "order by comuni_spesatotale.totale desc "
             . " LIMIT " . $limit . " OFFSET " . $start . ";";
     }
@@ -48,6 +48,17 @@
             comuni_spesatotale.cod_provincia = anagrafe_comuni.cod_provincia 
             where comuni_spesatotale.cod_regione = '" . $_GET["cod_reg"] . "' 
             order by comuni_spesatotale.totale desc "
+            . " LIMIT " . $limit . " OFFSET " . $start . ";";
+    }
+    elseif(isset($_GET["cod_prov"]))
+    {
+        $sql = "SELECT descr_comune, totale,anagrafe_comuni.cod_comune,anagrafe_comuni.cod_provincia "
+            . "FROM soldipubblici_notebook.comuni_spesatotale "
+            . "join soldipubblici_notebook.anagrafe_comuni on "
+            . "comuni_spesatotale.cod_comune = anagrafe_comuni.cod_comune and "
+            . "comuni_spesatotale.cod_provincia = anagrafe_comuni.cod_provincia "
+            . "and comuni_spesatotale.cod_provincia = '" . $_GET["cod_prov"] . "'"
+            . "order by comuni_spesatotale.totale desc "
             . " LIMIT " . $limit . " OFFSET " . $start . ";";
     }
     else{

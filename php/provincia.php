@@ -161,25 +161,32 @@
         $("#previousButton").click(function(event)
         {
             event.preventDefault();
-            if(document.getElementById('completeTableProvinciaIndex').innerHTML != "10")
+            if(document.getElementById('completeTableProvinciaIndex').innerHTML != "0")
             {
+                document.getElementById('completeTableProvinciaIndex').innerHTML = 
+                    parseInt(document.getElementById('completeTableProvinciaIndex').innerHTML) - 10;
+                
                 $("#tablespeseprovincia").load("php/completetableprovincia.php?cod_prov=" + 
                     "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
                     document.getElementById('completeTableProvinciaIndex').innerHTML + "&&off=10");
-                document.getElementById('completeTableProvinciaIndex').innerHTML = 
-                    parseInt(document.getElementById('completeTableProvinciaIndex').innerHTML) - 10;
+                
                 $(document).scrollTop( $("#tablespeseprovincia").offset().top );
             }
         });
         $("#nextButton").click(function(event)
         {
             event.preventDefault();
-            $("#tablespeseprovincia").load("php/completetableprovincia.php?cod_prov=" + 
-                "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
-                document.getElementById('completeTableProvinciaIndex').innerHTML + "&&off=10");
-            document.getElementById('completeTableProvinciaIndex').innerHTML = 
-                parseInt(document.getElementById('completeTableProvinciaIndex').innerHTML) + 10;
-            $(document).scrollTop( $("#tablespeseprovincia").offset().top );
+            if(document.getElementById('tablespeseprovincia').rows.length == 11)
+            {
+                document.getElementById('completeTableProvinciaIndex').innerHTML = 
+                    parseInt(document.getElementById('completeTableProvinciaIndex').innerHTML) + 10;
+                
+                $("#tablespeseprovincia").load("php/completetableprovincia.php?cod_prov=" + 
+                    "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
+                    document.getElementById('completeTableProvinciaIndex').innerHTML + "&&off=10");
+                
+                $(document).scrollTop( $("#tablespeseprovincia").offset().top );
+            }
         });
         
         $("#previousButtonComuniSpeseTotali").click(function(event)

@@ -46,13 +46,17 @@
                 
                 <?php 
                 
-                if(isset($_GET["cod_reg"]) && isset($_GET["cod_prov"]))
+                if(isset($_GET["cod_prov"]))
                 {
-                    $partialLink = "\"cod_prov=" . $_GET["cod_prov"] + "&&cod_reg=" . $_GET["cod_reg"] . "&&\"";
+                    $partialLink = "\"cod_prov=" . $_GET["cod_prov"] . "&&\"";
                 }
                 elseif (isset($_GET["cod_reg"]))
                 {
                     $partialLink = "\"cod_reg=" . $_GET["cod_reg"] . "&&\"";
+                }
+                elseif (isset($_GET["cod_rip"]))
+                {
+                    $partialLink = "\"cod_rip=" . urlencode($_GET["cod_rip"]) . "&&\"";
                 }
                 else
                 {
@@ -65,7 +69,7 @@
                         + document.getElementById('tableComuniSpeseTotaliIndex').innerHTML + "&&off=30";
                 
                 $("#tablecomunispesetotali").load(link);
-                
+                console.log(link);
                 $(document).scrollTop( $("#tablecomunispesetotalirow").offset().top );
             }
         });
@@ -79,13 +83,17 @@
             
                 <?php 
                 
-                if(isset($_GET["cod_reg"]) && isset($_GET["cod_prov"]))
+                if(isset($_GET["cod_prov"]))
                 {
-                    $partialLink = "\"cod_prov=" . $_GET["cod_prov"] + "&&cod_reg=" . $_GET["cod_reg"] . "&&\"";
+                    $partialLink = "\"cod_prov=" . $_GET["cod_prov"] . "&&\"";
                 }
                 elseif (isset($_GET["cod_reg"]))
                 {
                     $partialLink = "\"cod_reg=" . $_GET["cod_reg"] . "&&\"";
+                }
+                elseif (isset($_GET["cod_rip"]))
+                {
+                    $partialLink = "\"cod_rip=" . urlencode($_GET["cod_rip"]) . "&&\"";
                 }
                 else
                 {
@@ -96,7 +104,7 @@
                 
                 var link = "php/getlistacomuniperspesa.php?" + <?php echo $partialLink; ?> + "start=" 
                         + document.getElementById('tableComuniSpeseTotaliIndex').innerHTML + "&&off=30";
-                
+                console.log(link);
                 $("#tablecomunispesetotali").load(link);
                 
                 $(document).scrollTop( $("#tablecomunispesetotalirow").offset().top );

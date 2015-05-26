@@ -72,6 +72,18 @@
                     . " ORDER BY comuni_spesatotale.totalepercittadino DESC "
                     . " LIMIT " . $limit . " OFFSET " . $start . ";";
         }
+        elseif (isset($_GET["cod_rip"]))
+        {
+            $sql = "SELECT descr_comune, totale, totalepercittadino, "
+                    . " comuni_spesatotale.cod_comune, comuni_spesatotale.cod_provincia"
+                    . " FROM soldipubblici_notebook.comuni_spesatotale "
+                    . " JOIN soldipubblici_notebook.anagrafe_comuni ON "
+                    . " comuni_spesatotale.cod_comune = anagrafe_comuni.cod_comune AND "
+                    . " comuni_spesatotale.cod_provincia = anagrafe_comuni.cod_provincia"
+                    . " WHERE comuni_spesatotale.cod_ripartizione = '" . $_GET["cod_rip"] . "' "
+                    . " ORDER BY comuni_spesatotale.totalepercittadino DESC "
+                    . " LIMIT " . $limit . " OFFSET " . $start . ";";
+        }
         else
         {
             $sql = "SELECT descr_comune, totale, totalepercittadino, "
