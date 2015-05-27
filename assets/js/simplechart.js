@@ -258,19 +258,19 @@
         if(obj != null)
             link = link + obj;
         //obj.replace(" ", "%20");
-        console.log(link);
+//        console.log(link);
         
-        jQuery.ajax({
-                type: "GET",
-                url: link ,
-
-                success: function (obj) {
-                    console.log(obj);
-                },
-                error:function (obj) {
-                    console.log(obj);
-                }
-            });
+//        jQuery.ajax({
+//                type: "GET",
+//                url: link ,
+//
+//                success: function (obj) {
+//                    console.log(obj);
+//                },
+//                error:function (obj) {
+//                    console.log(obj);
+//                }
+//            });
         
         d3.csv(link, function(error, data) {
             data.forEach(function(d) {

@@ -45,7 +45,13 @@
         }
 
         #barspeseregioni text {
-           fill: white;
+           fill: black;
+           font: 10px sans-serif;
+           text-anchor: end;
+        }
+        
+        #barspeseregioni a {
+           fill: black;
            font: 10px sans-serif;
            text-anchor: end;
         }

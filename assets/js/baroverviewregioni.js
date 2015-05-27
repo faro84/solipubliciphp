@@ -1,6 +1,6 @@
 
-var width = 420,
-    barHeight = 20;
+var width = 820,
+    barHeight = 30;
 
 var x = d3.scale.linear()
     .range([0, width]);
@@ -18,10 +18,12 @@ var height = 600;
 var chart = d3.select("#barspeseregioni")
     .attr("width", width);
 
-d3.csv("assets/data/data.csv", type, function(error, data)
+var link = "php/data/getlistaregioniperspesatotale.php";
+
+d3.csv(link, type, function(error, data)
 {
-    console.log(data);
-    x.domain([0, d3.max(data, function(d) { return d.value; })]);
+//    console.log(data);
+    x.domain([0, d3.max(data, function(d) { return d.totale; })]);
 
     chart.attr("height", barHeight * data.length);
 
@@ -31,13 +33,13 @@ d3.csv("assets/data/data.csv", type, function(error, data)
         .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
 
     bar.append("a")
-        .attr("xlink:href", "http://en.wikipedia.org/wiki/")
+        .attr("xlink:href", "index.php")
         .on("mouseover", function(d, i){ 
                 d3.select(this) 
-                    .attr({"xlink:href": "http://example.com/" + d.value});
+                    .attr({"xlink:href": "index.php?content=reg&&cod_reg=" + d.codregione});
             })
         .append("rect")
-        .attr("width", function(d) { return x(d.value); })
+        .attr("width", function(d) { return x(d.totale) - 30; })
         .attr("height", barHeight - 1);
 
 //    bar.append("a") 
@@ -46,22 +48,28 @@ d3.csv("assets/data/data.csv", type, function(error, data)
 //         .attr("xlink:show", "new"); 
  
     bar.append("text")
-        .attr("x", function(d) { return x(d.value) - 3; })
+
+        .attr("x", function(d) { return x(d.totale) + 30; })
         .attr("y", barHeight / 2)
         .attr("dy", ".35em")
-        .text(function(d) { return d.value; });
+        .attr("dx", ".35em")
+        .append("a")
+        .attr("xlink:href", "index.php")
+        .on("mouseover", function(d, i){ 
+                d3.select(this) 
+                    .attr({"xlink:href": "index.php?content=reg&&cod_reg=" + d.codregione});
+            })        
+        //.attr("alignment-baseline","baseline")
+//        .attr("text-anchor", "start")
+        
+        .text(function(d) { return d.regione; });
 //
 //    bar.on("click", function(d,i) {
 //        
 //    });
 });
 
-function getvalue(d) { return d.value; }
-
 function type(d) {
-  d.value = +d.value; // coerce to number
+  d.totale = +d.totale; // coerce to number
   return d;
 }
-
-
-
