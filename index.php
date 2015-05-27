@@ -42,9 +42,12 @@
     
     <!-- Style  -->
     <style>
-        <?php if(($_GET["content"]) == "naz"){
+        <?php if($_GET["content"] == "naz"){
             include("assets/css/sequence.css");
         }
+//        elseif($_GET["content"] == "overview_reg"){
+//            include("assets/css/indexoverview.css");
+//        }
         else{
             include("assets/css/index.css");
         }
@@ -287,7 +290,10 @@
                     <li>
                         <a href="ui-elements.html"><i class="fa fa-desktop"></i> UI Elements</a>
                     </li>
-					<li>
+                    <li>
+                        <a href="index.php?content=overview_reg"><i class="fa fa-desktop"></i>Overview regioni</a>
+                    </li>
+                    <li>
                         <a href="chart.html"><i class="fa fa-bar-chart-o"></i> Charts</a>
                     </li>
                     <li>
@@ -349,6 +355,8 @@
                             include("php/listacompletaspesepertipologiacomune.php");
                         if($content == "ct")
                             include("php/listacompletacomunispesepertipologia.php");
+                        if($content == "overview_reg")
+                            include("php/overview/overviewregioni.php");
                     }
                     else
                     {
@@ -394,6 +402,9 @@
                     }
                     else if($content == "naz"){
                         echo "<script type=\"text/javascript\" src=\"assets/js/sequence.js\"></script>";
+                    }
+                    else if($content == "overview_reg"){
+                        echo "<script type=\"text/javascript\" src=\"assets/js/baroverviewregioni.js\"></script>";
                     }
         }
         else{

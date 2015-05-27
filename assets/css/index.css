@@ -39,4 +39,14 @@
         .dot {
           stroke: #000;
         }
+        
+        #barspeseregioni rect {
+            fill: red;
+        }
+
+        #barspeseregioni text {
+           fill: white;
+           font: 10px sans-serif;
+           text-anchor: end;
+        }
 
