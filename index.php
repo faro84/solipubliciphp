@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -357,6 +357,8 @@
                             include("php/listacompletacomunispesepertipologia.php");
                         if($content == "overview_reg")
                             include("php/overview/overviewregioni.php");
+                        if($content == "ente")
+                            include("php/ente.php");
                     }
                     else
                     {

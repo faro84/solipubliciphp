@@ -14,7 +14,7 @@
     }
         
     $limit = $end;
-    $sql = "SELECT TOTALE,DESCRIZIONE_ENTE FROM soldipubblici_notebook.enti_spesatotale "
+    $sql = "SELECT TOTALE,DESCRIZIONE_ENTE,COD_ENTE FROM soldipubblici_notebook.enti_spesatotale "
             . "where cod_comune = '' && cod_provincia= '' "
             . "&& cod_regione= '" . $_GET["cod_reg"] . "'"
             . " and totale != '0'"
@@ -25,7 +25,7 @@
     {
         while($row = $result->fetch_assoc())
         {
-            echo "<a href=\"#\" class=\"list-group-item\">";
+            echo "<a href=\"index.php?content=ente&&cod_ente=" . $row["COD_ENTE"] . "\" class=\"list-group-item\">";
             echo "<span class=\"badge\">" . number_format(floor($row["TOTALE"]), 0, ",", ".") . "</span>";
             echo "<i class=\"fa fa-fw fa-comment\"></i>" . $row["DESCRIZIONE_ENTE"];
             echo "</a>";

@@ -62,7 +62,7 @@
             <div class="panel-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover" id="tablespeseregione">
-                        <?php include "php/completetableregione.php"; ?>
+                        <?php include "php/overview/getcompletetableoverviewregione.php"; ?>
                     </table>
                 </div>
                 <div class="buttonsPreviousNext">
@@ -127,17 +127,23 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Enti Regionali
+                    Enti Regionali per spesa totale
                 </div>
                 <div class="panel-body">
-                    <div class="list-group-mine">
-                        <?php
-                            global $start;
-                            global $off;
-                            $start = 0;
-                            $off = 10;
-                            include "php/getentiregione.php";
-                        ?>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover" id="tablespesecomune">
+                            <?php
+                                include "php/getenti.php";
+                            ?>
+                        </table>
+                    </div>
+                    <div class="buttonsPreviousNext">
+                        <a href="#" id="previousButton" class="text-left">
+                            <i class="fa fa-arrow-circle-left"></i>Previous Tasks
+                        </a>
+                        <a href="#" id="nextButton" class="text-right">
+                            Next Tasks <i class="fa fa-arrow-circle-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -156,7 +162,7 @@
             </div>
         </div>
     </div>
-                
+
     <div id="completeTableRegioneIndex" style="display: none;">0</div>
     <div id="listaComuniSpeseTotaliIndex" style="display: none;">0</div>
     <div id="listaComuniSpeseTPerPersonaIndex" style="display: none;">0</div>
