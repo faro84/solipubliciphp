@@ -63,7 +63,7 @@
                 </div> 
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover" id="tablespesecomune">
+                        <table class="table table-striped table-bordered table-hover" id="tablespeseente">
                             <?php
                                 include "php/completetableente.php";
                             ?>
@@ -160,9 +160,8 @@
             event.preventDefault();
             if(document.getElementById('myOutput').innerHTML != "10")
             {
-                $("#tablespesecomune").load("php/completetablecomune.php?cod_com=" + 
-                    "<?php echo "" . $_GET["cod_com"]; ?>" + "&&cod_prov=" + 
-                    "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
+                $("#tablespeseente").load("php/completetableente.php?cod_ente=" + 
+                    "<?php echo "" . $_GET["cod_ente"]; ?>" + "&&start=" + 
                 document.getElementById('myOutput').innerHTML + "&&off=10");
                 document.getElementById('myOutput').innerHTML = 
                     parseInt(document.getElementById('myOutput').innerHTML) - 10;
@@ -172,9 +171,8 @@
         $("#nextButton").click(function(event)
         {
             event.preventDefault();
-            $("#tablespesecomune").load("php/completetablecomune.php?cod_com=" + 
-                "<?php echo "" . $_GET["cod_com"]; ?>" + "&&cod_prov=" + 
-                "<?php echo "" . $_GET["cod_prov"] ?>" + "&&start=" + 
+            $("#tablespeseente").load("php/completetableente.php?cod_ente=" + 
+                "<?php echo "" . $_GET["cod_ente"]; ?>" + "&&start=" + 
             document.getElementById('myOutput').innerHTML + "&&off=10");
             document.getElementById('myOutput').innerHTML = 
                 parseInt(document.getElementById('myOutput').innerHTML) + 10;

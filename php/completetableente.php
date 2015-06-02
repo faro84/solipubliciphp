@@ -38,6 +38,7 @@
         class TableElement
         {
             public $descrizione;
+            public $coddescrizione;
             public $totale;
             public $totalepersona;
             public $anno1;
@@ -46,7 +47,7 @@
         }
         
         $limit = $end;
-        $sql = "SELECT * FROM soldipubblici_notebook.enti_spesatotale_per_tipologia "
+        $sql = "SELECT * FROM soldipubblici_notebook.enti_spesatotale_per_tipologia"
                 . " WHERE cod_ente = '" . $_GET["cod_ente"] . "'"
                 . " ORDER BY TOTALE DESC LIMIT " . $limit . " OFFSET " . $start . ";";
         echo $sql;
@@ -59,6 +60,7 @@
                 $tableelement = new TableElement();
                 $tableelement->totale = $row["TOTALE"];
                 $tableelement->descrizione = $row['DESCRIZIONE'];
+                $tableelement->coddescrizione = $row['CODDESCRIZIONE'];
                 $tableelement->totalepersona = $row['TOTALEPERCITTADINO'];
                 $tableelement->anno1 = "0";
                 $tableelement->anno2 = "0";
@@ -69,8 +71,8 @@
         
         foreach($tableElements as $tableElement)
         {
-            $sql2 = "SELECT * FROM soldipubblici_notebook.comuni_spesatotale_per_anno_per_tipologia "
-                    . "where cod_ente = '" . $_GET["cod_ente"] . "';";
+            $sql2 = "SELECT * FROM soldipubblici_notebook.enti_spesatotale_per_anno_per_tipologia "
+                    . "where coddescrizione = '" . $tableElement->coddescrizione . "';";
             echo $sql2;
             $result2 = $conn->query($sql2);
             if ($result2->num_rows > 0)

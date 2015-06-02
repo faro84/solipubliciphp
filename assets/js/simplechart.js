@@ -141,6 +141,10 @@
         GenerateComunePlot(obj);
     }; 
     
+    function generateEnteChart(obj) {
+        GenerateEntePlot(obj);
+    }; 
+    
     function generateProvinciaChart(obj) {
         
     }; 
@@ -271,6 +275,97 @@
 //                    console.log(obj);
 //                }
 //            });
+        
+        d3.csv(link, function(error, data) {
+            data.forEach(function(d) {
+                d.date = parseDate(d.date);
+                d.totale = +d.totale;
+            });
+
+            // Scale the range of the data
+            x.domain(d3.extent(data, function(d) { return d.date; }));
+            y.domain([0, d3.max(data, function(d) { return d.totale; })]);
+
+            // Add the valueline path.
+            svg.append("path")
+                .attr("class", "line")
+                .attr("d", valueline(data));
+
+            // Add the scatterplot
+            svg.selectAll("dot")
+                .data(data)
+              .enter().append("circle")
+                .attr("r", 3.5)
+                .attr("cx", function(d) { return x(d.date); })
+                .attr("cy", function(d) { return y(d.totale); });
+
+            // Add the X Axis
+            svg.append("g")
+                .attr("class", "x axis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(xAxis);
+
+            // Add the Y Axis
+            svg.append("g")
+                .attr("class", "y axis")
+                .call(yAxis);
+
+        });
+    }; 
+    
+    function GenerateEntePlot(obj) {
+        // Set the dimensions of the canvas / graph
+        var margin = {top: 20, right: 70, bottom: 30, left: 100},
+            width = parseInt(d3.select('#row1').style('width'), 10) - margin.left - margin.right,
+            height = 400 - margin.top - margin.bottom;
+
+        console.log(parseInt(d3.select('#row1').style('width'), 10));
+
+        // Parse the date / time
+        var parseDate = d3.time.format("%d-%m-%Y").parse;
+
+        // Set the ranges
+        var x = d3.time.scale().range([0, width]);
+        var y = d3.scale.linear().range([height, 0]);
+
+        // Define the axes
+        var xAxis = d3.svg.axis().scale(x)
+            .orient("bottom").ticks(5);
+
+        var yAxis = d3.svg.axis().scale(y)
+            .orient("left").ticks(5);
+
+        // Define the line
+        var valueline = d3.svg.line()
+            .x(function(d) { return x(d.date); })
+            .y(function(d) { return y(d.totale); });
+
+        // Adds the svg canvas
+        var svg = d3.select("#scatter")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        // Get the data
+        
+        var link = "php/plot/plotentespesemensili.php?";
+        if(obj != null)
+            link = link + obj;
+        //obj.replace(" ", "%20");
+        console.log(link);
+        
+        jQuery.ajax({
+                type: "GET",
+                url: link ,
+
+                success: function (obj) {
+                    console.log(obj);
+                },
+                error:function (obj) {
+                    console.log(obj);
+                }
+            });
         
         d3.csv(link, function(error, data) {
             data.forEach(function(d) {

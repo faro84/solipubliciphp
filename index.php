@@ -383,7 +383,7 @@
         if(isset($_GET["content"]))
         {
             $content = $_GET["content"];
-            if($content == "table" || $content == "rip" || $content == "com" || $content == "prov"){
+            if($content == "table" || $content == "rip" || $content == "com" || $content == "prov" || $content == "ente"){
         ?>
                 <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>
                 <script src="assets/js/simplechart.js"></script>
@@ -398,6 +398,9 @@
                         $string = "generateRipartizioneChart(\"" . $_GET["cod_rip"] . "\")";
                     } else if ($content == "com") {
                         $string = "generateComuneChart(\"cod_com=" . $_GET["cod_com"] . "&&cod_prov=" . $_GET["cod_prov"] . "\")";
+                    }
+                    else if ($content == "ente") {
+                        $string = "generateEnteChart(\"cod_ente=" . $_GET["cod_ente"]. "\");";
                     }
                     else if ($content == "prov") {
                         $string = "generateProvinciaChart(\"cod_prov=" . $_GET["cod_prov"] . "\")";
