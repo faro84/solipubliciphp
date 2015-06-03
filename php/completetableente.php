@@ -72,7 +72,8 @@
         foreach($tableElements as $tableElement)
         {
             $sql2 = "SELECT * FROM soldipubblici_notebook.enti_spesatotale_per_anno_per_tipologia "
-                    . "where coddescrizione = '" . $tableElement->coddescrizione . "';";
+                    . " WHERE coddescrizione = '" . $tableElement->coddescrizione . "'"
+                    . " AND cod_ente = '" . $_GET["cod_ente"] . "';";
             echo $sql2;
             $result2 = $conn->query($sql2);
             if ($result2->num_rows > 0)
