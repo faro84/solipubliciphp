@@ -62,6 +62,31 @@
             </div> 
             <div class="panel-body">
                 <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover" id="tablespeseenteregione">
+                        <?php include "php/completetableenteregione.php"; ?>
+                    </table>
+                </div>
+                <div class="buttonsPreviousNext">
+                    <a href="" id="previousButton" class="text-left"> 
+                        <i class="fa fa-arrow-circle-left"></i>Previous Tasks
+                    </a>
+                    <a href="" id="nextButton" class="text-right">
+                        Next Tasks <i class="fa fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" id="rowtablespeseregione">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Lista spese somma comuni
+            </div> 
+            <div class="panel-body">
+                <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover" id="tablespeseregione">
                         <?php include "php/completetableregione.php"; ?>
                     </table>
